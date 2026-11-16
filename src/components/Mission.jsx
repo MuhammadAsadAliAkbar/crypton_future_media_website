@@ -1,6 +1,6 @@
 
 import '../components/css/Mission.css';
-import girlVr from "../assets/girlVr.png";
+import vs from "../assets/vs.png";
 
 export default function Mission() {
   return (
@@ -50,7 +50,7 @@ export default function Mission() {
               <div className="mission-circle-inner">
 
                 <img
-                  src={girlVr}
+                  src={vs}
                   alt="Virtual Reality Futuristic Character"
                   className="mission-character"
                 />

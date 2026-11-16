@@ -1,6 +1,6 @@
 
 import { useMemo, useRef } from "react";
-import vs from "../assets/vs.png";
+import vv from "../assets/vv.png";
 import buttonHoverSound from "../assets/audio/button-hover.mp3";
 import "./css/Hero.css";
 
@@ -135,7 +135,7 @@ export default function Hero() {
             <div className="atom-image-circle">
 
               <img
-                src={vs}
+                src={vv}
                 alt="Virtual Reality Technology"
                 className="vr-image atom-image"
               />
