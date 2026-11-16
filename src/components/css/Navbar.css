@@ -1,90 +1,244 @@
 
 /* =========================================
-   NAVBAR MAIN
+   NAVBAR BASE
 ========================================= */
 
-.navbar {
+.navbar-premium {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 999;
+  z-index: 9999;
 
   background: transparent;
+  border-bottom: 1px solid transparent;
+
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(0);
+
+  transform: perspective(1200px) translateY(0) rotateX(0deg);
+  transform-origin: top center;
 
   transition:
-    background 0.35s ease,
-    backdrop-filter 0.35s ease,
-    transform 0.35s ease,
-    box-shadow 0.35s ease;
+    background 0.65s ease,
+    backdrop-filter 0.65s ease,
+    border-color 0.65s ease,
+    box-shadow 0.65s ease,
+    transform 0.65s ease;
 }
 
-.navbar-scrolled-down {
-  background: rgba(5, 20, 25, 0.88);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+/* =========================================
+   SCROLL DOWN - TEAL GLASS
+========================================= */
 
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+.navbar-premium.navbar-scrolled-down {
+  isolation: isolate;
+  overflow: hidden;
+
+  background: linear-gradient(
+    125deg,
+    rgba(4, 55, 50, 0.96),
+    rgba(10, 115, 101, 0.92),
+    rgba(35, 190, 165, 0.78),
+    rgba(5, 75, 69, 0.94),
+    rgba(25, 145, 125, 0.9)
+  );
+
+  background-size: 400% 400%;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.28),
+    0 5px 25px rgba(0, 220, 185, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -2px 0 rgba(67, 216, 193, 0.18);
+
+  animation:
+    tealGradientFlow 9s ease infinite,
+    navbar3DEnter 0.65s ease both;
 }
+
+/* =========================================
+   INNER GLOW
+========================================= */
+
+.navbar-premium.navbar-scrolled-down::before,
+.navbar-premium.navbar-scrolled-down::after {
+  content: "";
+  position: absolute;
+  inset: -100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.navbar-premium.navbar-scrolled-down::before {
+  background:
+    radial-gradient(
+      ellipse at 20% 30%,
+      rgba(67, 216, 193, 0.42),
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 80% 70%,
+      rgba(0, 255, 213, 0.25),
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at 50% 50%,
+      rgba(15, 130, 115, 0.3),
+      transparent 55%
+    );
+
+  filter: blur(35px);
+
+  animation: innerGlowMove 12s ease-in-out infinite alternate;
+}
+
+.navbar-premium.navbar-scrolled-down::after {
+  background: linear-gradient(
+    110deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.12) 45%,
+    rgba(67, 216, 193, 0.16) 50%,
+    transparent 70%
+  );
+
+  transform: rotate(-12deg);
+
+  animation: glassReflection 7s ease-in-out infinite;
+}
+
+/* =========================================
+   NAVBAR ANIMATIONS
+========================================= */
+
+@keyframes tealGradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes innerGlowMove {
+  0% {
+    transform: translate3d(-8%, -5%, 0) rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: translate3d(8%, 5%, 0) rotate(12deg) scale(1.12);
+  }
+
+  100% {
+    transform: translate3d(-3%, 8%, 0) rotate(-8deg) scale(1.05);
+  }
+}
+
+@keyframes glassReflection {
+  0% {
+    transform: translateX(-35%) rotate(-12deg);
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translateX(35%) rotate(-12deg);
+    opacity: 0;
+  }
+}
+
+@keyframes navbar3DEnter {
+  0% {
+    transform: perspective(1200px) translateY(-18px) rotateX(-12deg);
+  }
+
+  60% {
+    transform: perspective(1200px) translateY(3px) rotateX(2deg);
+  }
+
+  100% {
+    transform: perspective(1200px) translateY(0) rotateX(0deg);
+  }
+}
+
+/* =========================================
+   INNER ALIGNMENT
+========================================= */
 
 .nav-inner {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
   min-height: 85px;
 
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
 
   gap: 25px;
 }
 
 /* =========================================
-   LOGO
+   BRAND LOGO
 ========================================= */
 
 .brand {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 11px;
-
-  flex-shrink: 0;
+  gap: 12px;
 
   text-decoration: none;
-  color: #fff;
+  flex-shrink: 0;
 }
 
 .brand-icon {
-  width: 37px;
-  height: 37px;
+  width: 38px;
+  height: 38px;
 
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 3px;
-
-  border: 1px solid rgba(48, 222, 205, 0.45);
-  border-radius: 10px;
-
-  background: rgba(39, 217, 200, 0.08);
 }
 
 .brand-icon i {
   display: block;
-  width: 4px;
-  border-radius: 5px;
-  background: #35ddce;
-  box-shadow: 0 0 8px rgba(53, 221, 206, 0.5);
+  width: 7px;
+  border-radius: 10px;
+
+  background: #43d8c1;
+
+  box-shadow: 0 0 12px rgba(67, 216, 193, 0.4);
 }
 
 .brand-icon i:nth-child(1) {
-  height: 12px;
+  height: 18px;
 }
 
 .brand-icon i:nth-child(2) {
-  height: 21px;
+  height: 32px;
 }
 
 .brand-icon i:nth-child(3) {
-  height: 16px;
+  height: 24px;
 }
 
 .brand-text {
@@ -94,47 +248,48 @@
 }
 
 .brand-text strong {
-  font-size: 15px;
+  color: #fff;
+  font-size: 17px;
   font-weight: 800;
   letter-spacing: 2px;
 }
 
 .brand-text small {
+  color: #43d8c1;
+  font-size: 9px;
+  letter-spacing: 3px;
   margin-top: 5px;
-  color: #35ddce;
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 2.5px;
 }
 
 /* =========================================
-   NAVIGATION LINKS
+   NAV LINKS
 ========================================= */
 
 .nav-links {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 21px;
+  justify-content: center;
+  gap: clamp(13px, 1.6vw, 23px);
 }
 
-.nav-links > a:not(.nav-cta):not(.nav-resume-btn):not(.nav-login-btn) {
+.nav-links > a {
   position: relative;
-
-  color: rgba(255, 255, 255, 0.75);
-  text-decoration: none;
-
-  font-size: 12px;
-  font-weight: 500;
-
   white-space: nowrap;
 
-  transition: color 0.3s ease;
+  color: #fff;
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease,
+    text-shadow 0.3s ease;
 }
 
-.nav-links > a:not(.nav-cta):not(.nav-resume-btn):not(.nav-login-btn)::after {
+.nav-links > a::after {
   content: "";
-
   position: absolute;
   left: 0;
   bottom: -7px;
@@ -142,190 +297,542 @@
   width: 0;
   height: 2px;
 
-  border-radius: 5px;
-  background: #35ddce;
+  border-radius: 10px;
+  background: #43d8c1;
+
+  box-shadow: 0 0 10px rgba(67, 216, 193, 0.6);
 
   transition: width 0.3s ease;
 }
 
-.nav-links > a:not(.nav-cta):not(.nav-resume-btn):not(.nav-login-btn):hover {
-  color: #35ddce;
+.nav-links > a:hover {
+  color: #43d8c1;
+  transform: translateY(-2px);
+  text-shadow: 0 0 15px rgba(67, 216, 193, 0.3);
 }
 
-.nav-links > a:not(.nav-cta):not(.nav-resume-btn):not(.nav-login-btn):hover::after {
+.nav-links > a:hover::after {
   width: 100%;
 }
 
+/* WHITE TEXT WHEN SCROLLED */
+
+.navbar-premium.navbar-scrolled-down .brand-text strong,
+.navbar-premium.navbar-scrolled-down .brand-text small,
+.navbar-premium.navbar-scrolled-down .nav-links > a {
+  color: #fff;
+}
+
+.navbar-premium.navbar-scrolled-down .brand-icon i {
+  background: #fff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.55);
+}
+
+.navbar-premium.navbar-scrolled-down .nav-links > a:hover {
+  color: #d5fff7;
+}
+
+.navbar-premium.navbar-scrolled-down .nav-links > a::after {
+  background: #fff;
+}
+
 /* =========================================
-   ACTION BUTTON ALIGNMENT
+   ACTION BUTTON LAYOUT
 ========================================= */
 
 .nav-actions {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-
-  margin-left: 5px;
+  justify-content: flex-end;
+  gap: 12px;
   flex-shrink: 0;
 }
 
-/* Common button styles */
+.desktop-actions {
+  display: flex;
+}
+
+.mobile-actions {
+  display: none;
+}
+
+/* =========================================
+   COMMON BUTTON STYLES
+========================================= */
 
 .nav-resume-btn,
-.nav-login-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+.nav-login-btn,
+.nav-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
 
-  height: 42px;
-  padding: 0 15px;
+  min-height: 46px;
+  padding: 0 16px;
 
-  box-sizing: border-box;
-  white-space: nowrap;
-
-  border-radius: 9px;
-
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 600;
-
-  transition:
-    transform 0.25s ease,
-    color 0.25s ease,
-    background 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-/* =========================================
-   CHECK RESUME
-========================================= */
-
-.nav-resume-btn {
-  color: #9ff8ed;
-
-  background: rgba(39, 217, 200, 0.09);
-  border: 1px solid rgba(39, 217, 200, 0.35);
-}
-
-.nav-resume-btn b {
-  font-size: 15px;
-  font-weight: 700;
-}
-
-.nav-resume-btn:hover {
-  color: #061817;
-  background: #35ddce;
-  border-color: #35ddce;
-
-  transform: translateY(-2px);
-
-  box-shadow: 0 5px 15px rgba(39, 217, 200, 0.2);
-}
-
-/* =========================================
-   LOGIN
-========================================= */
-
-.nav-login-btn {
-  color: #f4f7fa;
-
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-}
-
-.nav-login-btn:hover {
-  color: #35ddce;
-
-  border-color: #35ddce;
-  background: rgba(39, 217, 200, 0.08);
-
-  transform: translateY(-2px);
-}
-
-/* =========================================
-   START PROJECT
-========================================= */
-
-.nav-actions .nav-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 9px;
 
-  height: 42px;
-  padding: 0 16px;
+  border-radius: 12px;
 
-  box-sizing: border-box;
-  white-space: nowrap;
-
-  border-radius: 9px;
-
-  color: #061817;
-  background: linear-gradient(135deg, #5af0df, #22c9b9);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.35px;
 
   text-decoration: none;
-  font-size: 12px;
-  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
 
-  box-shadow: 0 4px 0 #087d74;
+  transform-style: preserve-3d;
 
   transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-.nav-actions .nav-cta b {
-  font-size: 15px;
-}
-
-.nav-actions .nav-cta:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 7px 0 #087d74;
-}
-
-.nav-actions .nav-cta:active {
-  transform: translateY(2px);
-  box-shadow: 0 1px 0 #087d74;
+    transform 0.35s cubic-bezier(.2,.8,.2,1),
+    box-shadow 0.35s ease,
+    background 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease;
 }
 
 /* =========================================
-   MOBILE MENU TOGGLE
+   BUTTON 1: CHECK MY RESUME
+   METALLIC TEAL 3D
+========================================= */
+
+.nav-resume-btn {
+  color: #72f5df;
+
+  border: 1px solid rgba(67, 216, 193, 0.85);
+
+  background: linear-gradient(
+    145deg,
+    rgba(18, 83, 75, 0.95),
+    rgba(4, 35, 32, 0.98)
+  );
+
+  box-shadow:
+    0 5px 0 #07574e,
+    0 8px 15px rgba(0, 0, 0, 0.22),
+    0 0 15px rgba(67, 216, 193, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.nav-resume-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background: linear-gradient(
+    120deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.2) 48%,
+    transparent 70%
+  );
+
+  transform: translateX(-120%) skewX(-20deg);
+  transition: transform 0.7s ease;
+}
+
+.nav-resume-btn:hover {
+  color: #fff;
+
+  background: linear-gradient(
+    145deg,
+    #20a994,
+    #087e70,
+    #07574e
+  );
+
+  transform: translateY(-5px) rotateX(8deg);
+
+  box-shadow:
+    0 8px 0 #03463f,
+    0 14px 25px rgba(0, 0, 0, 0.3),
+    0 0 25px rgba(67, 216, 193, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.nav-resume-btn:hover::before {
+  transform: translateX(120%) skewX(-20deg);
+}
+
+.nav-resume-btn:active {
+  transform: translateY(3px) rotateX(0deg);
+
+  box-shadow:
+    0 2px 0 #03463f,
+    0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-icon {
+  width: 25px;
+  height: 25px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  color: #72f5df;
+  background: rgba(67, 216, 193, 0.16);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 3px 7px rgba(0, 0, 0, 0.2);
+
+  transition: 0.35s ease;
+}
+
+.nav-resume-btn:hover .btn-icon {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px) rotate(45deg);
+}
+
+.btn-shine {
+  position: absolute;
+  top: -50%;
+  left: -100%;
+
+  width: 50%;
+  height: 200%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+
+  transform: rotate(25deg);
+  transition: left 0.65s ease;
+
+  pointer-events: none;
+}
+
+.nav-resume-btn:hover .btn-shine {
+  left: 150%;
+}
+
+/* =========================================
+   BUTTON 2: LOGIN
+   DARK GLASS 3D
+========================================= */
+
+.nav-login-btn {
+  color: #fff;
+
+  border: 1px solid rgba(255, 255, 255, 0.28);
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.035)
+  );
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  box-shadow:
+    0 5px 0 rgba(255, 255, 255, 0.08),
+    0 9px 18px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.nav-login-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  border-radius: inherit;
+
+  background: linear-gradient(
+    135deg,
+    rgba(67, 216, 193, 0.25),
+    transparent 50%,
+    rgba(67, 216, 193, 0.1)
+  );
+
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.nav-login-btn:hover {
+  color: #fff;
+
+  border-color: #72f5df;
+
+  background: linear-gradient(
+    145deg,
+    rgba(17, 111, 98, 0.95),
+    rgba(3, 40, 36, 0.98)
+  );
+
+  transform: translateY(-5px) rotateY(-5deg);
+
+  box-shadow:
+    0 8px 0 #063d36,
+    0 14px 25px rgba(0, 0, 0, 0.28),
+    0 0 22px rgba(67, 216, 193, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.nav-login-btn:hover::before {
+  opacity: 1;
+}
+
+.nav-login-btn:active {
+  transform: translateY(3px) rotateY(0deg);
+
+  box-shadow:
+    0 2px 0 #063d36,
+    0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.login-icon {
+  width: 25px;
+  height: 25px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: #72f5df;
+  background: rgba(67, 216, 193, 0.13);
+
+  border: 1px solid rgba(67, 216, 193, 0.3);
+
+  box-shadow:
+    0 0 10px rgba(67, 216, 193, 0.12),
+    inset 0 1px 2px rgba(255, 255, 255, 0.15);
+
+  transition: transform 0.55s ease, background 0.35s ease;
+}
+
+.nav-login-btn:hover .login-icon {
+  color: #fff;
+  background: rgba(67, 216, 193, 0.3);
+  transform: rotateY(360deg) scale(1.08);
+}
+
+/* =========================================
+   BUTTON 3: START A PROJECT
+   EMERALD GRADIENT 3D
+========================================= */
+
+.nav-cta {
+  color: #03251f;
+
+  border: 1px solid rgba(153, 255, 233, 0.9);
+
+  background: linear-gradient(
+    135deg,
+    #a1ffed 0%,
+    #54e5ce 35%,
+    #20b69f 70%,
+    #087e70 100%
+  );
+
+  box-shadow:
+    0 6px 0 #087566,
+    0 10px 20px rgba(0, 0, 0, 0.22),
+    0 0 20px rgba(67, 216, 193, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -3px 5px rgba(0, 70, 60, 0.18);
+}
+
+.nav-cta::before {
+  content: "";
+  position: absolute;
+  top: -80%;
+  left: -70%;
+
+  width: 55%;
+  height: 260%;
+
+  background: rgba(255, 255, 255, 0.45);
+
+  transform: rotate(25deg);
+  filter: blur(8px);
+
+  transition: left 0.65s ease;
+  pointer-events: none;
+}
+
+.nav-cta:hover {
+  color: #fff;
+
+  background: linear-gradient(
+    135deg,
+    #19b99f,
+    #087f70,
+    #04574e
+  );
+
+  transform: translateY(-6px) perspective(600px) rotateX(8deg);
+
+  box-shadow:
+    0 9px 0 #03483f,
+    0 16px 30px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(67, 216, 193, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.nav-cta:hover::before {
+  left: 140%;
+}
+
+.nav-cta:active {
+  transform: translateY(3px) rotateX(0deg);
+
+  box-shadow:
+    0 2px 0 #03483f,
+    0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cta-arrow {
+  width: 25px;
+  height: 25px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  color: #fff;
+  background: rgba(3, 48, 40, 0.25);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 3px 6px rgba(0, 0, 0, 0.15);
+
+  transition: 0.35s ease;
+}
+
+.nav-cta:hover .cta-arrow {
+  color: #72f5df;
+  background: rgba(255, 255, 255, 0.16);
+  transform: translate(3px, -3px) rotate(45deg);
+}
+
+/* =========================================
+   SCROLL BUTTON COLORS
+========================================= */
+
+.navbar-premium.navbar-scrolled-down .nav-resume-btn,
+.navbar-premium.navbar-scrolled-down .nav-login-btn {
+  color: #fff;
+}
+
+.navbar-premium.navbar-scrolled-down .nav-resume-btn {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.17),
+    rgba(255, 255, 255, 0.06)
+  );
+
+  border-color: rgba(255, 255, 255, 0.65);
+}
+
+.navbar-premium.navbar-scrolled-down .btn-icon,
+.navbar-premium.navbar-scrolled-down .login-icon {
+  color: #fff;
+}
+
+.navbar-premium.navbar-scrolled-down .nav-login-btn {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.16),
+    rgba(255, 255, 255, 0.04)
+  );
+
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* CTA stays emerald */
+
+.navbar-premium.navbar-scrolled-down .nav-cta {
+  color: #03251f;
+
+  background: linear-gradient(
+    135deg,
+    #a1ffed,
+    #54e5ce,
+    #20b69f
+  );
+
+  border-color: rgba(153, 255, 233, 0.9);
+}
+
+.navbar-premium.navbar-scrolled-down .nav-cta:hover {
+  color: #fff;
+
+  background: linear-gradient(
+    135deg,
+    #19b99f,
+    #087f70,
+    #04574e
+  );
+}
+
+/* =========================================
+   FOCUS AND ACCESSIBILITY
+========================================= */
+
+.nav-resume-btn:focus-visible,
+.nav-login-btn:focus-visible,
+.nav-cta:focus-visible,
+.menu-toggle:focus-visible {
+  outline: 2px solid #72f5df;
+  outline-offset: 4px;
+}
+
+/* =========================================
+   MOBILE MENU BUTTON
 ========================================= */
 
 .menu-toggle {
   display: none;
 
-  width: 43px;
-  height: 43px;
+  width: 42px;
+  height: 42px;
 
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 6px;
-
-  border: 1px solid rgba(53, 221, 206, 0.3);
+  border: 1px solid rgba(67, 216, 193, 0.35);
   border-radius: 9px;
 
-  background: rgba(39, 217, 200, 0.08);
+  background: rgba(67, 216, 193, 0.08);
 
   cursor: pointer;
+  padding: 10px;
+
+  position: relative;
+  z-index: 5;
 }
 
 .menu-toggle span {
-  width: 19px;
+  display: block;
+  width: 100%;
   height: 2px;
 
-  border-radius: 5px;
-  background: #35ddce;
+  margin: 5px 0;
 
-  transition: all 0.3s ease;
+  background: #43d8c1;
+  border-radius: 5px;
+
+  transition: 0.3s ease;
 }
 
 .menu-active .menu-toggle span:first-child {
-  transform: translateY(8px) rotate(45deg);
+  transform: translateY(7px) rotate(45deg);
 }
 
 .menu-active .menu-toggle span:nth-child(2) {
@@ -333,93 +840,126 @@
 }
 
 .menu-active .menu-toggle span:last-child {
-  transform: translateY(-8px) rotate(-45deg);
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 /* =========================================
-   TABLET AND MOBILE
+   TABLET RESPONSIVE
+========================================= */
+
+@media (max-width: 1200px) {
+  .nav-inner {
+    gap: 15px;
+  }
+
+  .nav-links {
+    gap: 13px;
+  }
+
+  .nav-links > a {
+    font-size: 12px;
+  }
+
+  .nav-resume-btn,
+  .nav-login-btn,
+  .nav-cta {
+    padding: 0 11px;
+    font-size: 11px;
+  }
+
+  .nav-actions {
+    gap: 8px;
+  }
+}
+
+/* =========================================
+   MOBILE RESPONSIVE
 ========================================= */
 
 @media (max-width: 1050px) {
-
   .nav-inner {
-    min-height: 75px;
+    display: flex;
+    justify-content: space-between;
+    min-height: 85px;
+    gap: 15px;
   }
 
   .menu-toggle {
-    display: flex;
+    display: block;
     flex-shrink: 0;
+  }
+
+  .desktop-actions {
+    display: none;
   }
 
   .nav-links {
     position: absolute;
     top: 100%;
     left: 0;
-    right: 0;
+
+    width: 100%;
+    max-height: calc(100vh - 85px);
+    overflow-y: auto;
+
+    padding: 25px 5%;
 
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: flex-start;
     justify-content: flex-start;
-    gap: 0;
+    gap: 22px;
 
-    max-height: 0;
-    overflow: hidden;
+    background: rgba(5, 35, 31, 0.97);
 
-    padding: 0 25px;
-
-    background: rgba(5, 20, 25, 0.97);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border-bottom: 1px solid rgba(67, 216, 193, 0.2);
 
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
 
-    border-top: 1px solid transparent;
+    transform: perspective(800px) rotateX(-10deg) translateY(-12px);
+    transform-origin: top center;
 
-    transition:
-      max-height 0.4s ease,
-      opacity 0.3s ease,
-      padding 0.3s ease,
-      visibility 0.3s ease;
+    transition: 0.35s ease;
   }
 
   .nav-links.open {
-    max-height: 85vh;
-    overflow-y: auto;
-
-    padding: 15px 25px 25px;
-
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
 
-    border-top-color: rgba(53, 221, 206, 0.15);
+    transform: perspective(800px) rotateX(0) translateY(0);
   }
 
-  .nav-links > a:not(.nav-cta):not(.nav-resume-btn):not(.nav-login-btn) {
-    padding: 14px 0;
+  .nav-links > a {
+    width: fit-content;
     font-size: 14px;
   }
 
-  .nav-links > a:not(.nav-cta):not(.nav-resume-btn):not(.nav-login-btn)::after {
-    bottom: 7px;
-  }
-
-  .nav-actions {
+  .mobile-actions {
+    display: flex;
     width: 100%;
 
-    display: flex;
     flex-direction: column;
     align-items: stretch;
+    gap: 15px;
 
-    gap: 12px;
-    margin: 15px 0 5px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(67, 216, 193, 0.2);
   }
 
-  .nav-resume-btn,
-  .nav-login-btn,
-  .nav-actions .nav-cta {
+  .mobile-actions > a,
+  .mobile-actions > button {
     width: 100%;
-    height: 46px;
+    min-height: 49px;
+  }
+
+  .navbar-premium.navbar-scrolled-down .nav-links {
+    background: rgba(5, 75, 67, 0.97);
   }
 }
 
@@ -427,33 +967,49 @@
    SMALL MOBILE
 ========================================= */
 
-@media (max-width: 480px) {
-
+@media (max-width: 550px) {
   .nav-inner {
-    min-height: 68px;
+    min-height: 72px;
+    gap: 10px;
+  }
+
+  .brand {
+    gap: 8px;
   }
 
   .brand-icon {
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .brand-icon i {
+    width: 6px;
+  }
+
+  .brand-icon i:nth-child(1) {
+    height: 15px;
+  }
+
+  .brand-icon i:nth-child(2) {
+    height: 26px;
+  }
+
+  .brand-icon i:nth-child(3) {
+    height: 20px;
   }
 
   .brand-text strong {
-    font-size: 13px;
+    font-size: 12px;
+    letter-spacing: 1px;
   }
 
   .brand-text small {
     font-size: 7px;
+    letter-spacing: 2px;
   }
 
   .nav-links {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .nav-links.open {
-    padding-left: 20px;
-    padding-right: 20px;
+    max-height: calc(100vh - 72px);
   }
 }
 
@@ -462,11 +1018,19 @@
 ========================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .navbar,
+  .navbar-premium,
+  .navbar-premium::before,
+  .navbar-premium::after,
   .nav-links,
-  .nav-links a,
-  .nav-actions a,
+  .nav-links > a,
+  .nav-actions > a,
+  .nav-actions > button,
+  .btn-icon,
+  .login-icon,
+  .cta-arrow,
+  .btn-shine,
   .menu-toggle span {
     transition: none !important;
+    animation: none !important;
   }
 }
