@@ -496,32 +496,38 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* SCROLL DOWN INDICATOR */}
-      <motion.a
-        className="scroll-cue"
-        href="#about"
-        aria-label="Scroll down to About section"
-        animate={
-          shouldReduceMotion
-            ? {}
-            : {
-                y: [0, 8, 0],
-              }
-        }
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <span className="mouse">
-          <span className="mouse-wheel" />
-        </span>
-
-        <span className="scroll-arrow">
-          <span>↓</span>
-        </span>
-      </motion.a>
+      {/* PREMIUM SCROLL INDICATOR */}
+      <div className="scroll-cue-anchor">
+        <motion.a
+          className=""
+          href="#about"
+          aria-label="Scroll down to About section"
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={
+            shouldReduceMotion
+              ? { opacity: 1, scale: 1 }
+              : { opacity: 1, scale: 1, y: [0, 7, 0] }
+          }
+          transition={
+            shouldReduceMotion
+              ? { duration: 0.45 }
+              : {
+                  opacity: { duration: 0.6, delay: 0.8 },
+                  scale: { duration: 0.6, delay: 0.8 },
+                  y: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+                }
+          }
+          whileHover={shouldReduceMotion ? {} : { scale: 1.08, rotateX: 8, rotateY: -6 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <span className="scroll-cue-glow" aria-hidden="true" />
+          {/* <span className="scroll-cue-label">SCROLL TO EXPLORE</span> */}
+          <span className="scroll-cue-mouse" aria-hidden="true">
+            <span className="scroll-cue-wheel" />
+          </span>
+          {/* <span className="scroll-cue-arrow" aria-hidden="true">↓</span> */}
+        </motion.a>
+      </div>
 
     </section>
   );
