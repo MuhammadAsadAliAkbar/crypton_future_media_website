@@ -1,9 +1,12 @@
 
-import { useMemo } from "react";
-import vrrs from "../assets/vrrs.png";
-import "../components/css/Hero.css"
+import { useMemo, useRef } from "react";
+import vs from "../assets/vs.png";
+import buttonHoverSound from "../assets/audio/button-hover.mp3";
+import "./css/Hero.css";
 
 export default function Hero() {
+  const hoverAudioRef = useRef(null);
+
   const particles = useMemo(() => {
     return Array.from({ length: 70 }, (_, i) => ({
       id: i,
@@ -16,8 +19,26 @@ export default function Hero() {
     }));
   }, []);
 
+  const playHoverSound = () => {
+    const audio = hoverAudioRef.current;
+
+    if (!audio) return;
+
+    audio.currentTime = 0;
+    audio.play().catch(() => {});
+  };
+
   return (
     <section id="home" className="hero">
+
+      {/* Button Hover Sound */}
+      <audio
+        ref={hoverAudioRef}
+        src={buttonHoverSound}
+        preload="auto"
+      />
+
+      {/* Background Particles */}
       <div className="custom-particles" aria-hidden="true">
         {particles.map((particle) => (
           <span
@@ -36,12 +57,16 @@ export default function Hero() {
         ))}
       </div>
 
+      {/* Background Effects */}
       <div className="hero-grid" />
       <div className="hero-glow hero-glow-left" />
       <div className="hero-glow hero-glow-right" />
 
       <div className="container hero-inner">
+
+        {/* LEFT CONTENT */}
         <div className="hero-copy">
+
           <div className="eyebrow">
             <span />
             FUTURE-READY DIGITAL ENGINEERING
@@ -57,17 +82,30 @@ export default function Hero() {
             ambitious businesses.
           </p>
 
+          {/* ACTION BUTTONS */}
           <div className="hero-actions">
-            <a href="#services" className="btn btn-primary">
+
+            <a
+              href="#services"
+              className="btn btn-primary"
+              onMouseEnter={playHoverSound}
+            >
               Explore Services <b>↗</b>
             </a>
 
-            <a href="#contact" className="btn btn-outline">
+            <a
+              href="#contact"
+              className="btn btn-outline"
+              onMouseEnter={playHoverSound}
+            >
               Start a Project
             </a>
+
           </div>
 
+          {/* HIGHLIGHTS */}
           <div className="hero-highlights">
+
             <div>
               <strong>AI</strong>
               <span>AI & RAG</span>
@@ -82,24 +120,31 @@ export default function Hero() {
               <strong>∞</strong>
               <span>Scalable</span>
             </div>
+
           </div>
         </div>
 
+        {/* RIGHT VISUAL */}
         <div className="hero-art" aria-hidden="true">
+
           <div className="vr-wrapper atom-hero-visual">
+
             <div className="vr-glow" />
 
-            {/* Circular image container */}
+            {/* CIRCULAR IMAGE */}
             <div className="atom-image-circle">
+
               <img
-                src={vrrs}
+                src={vs}
                 alt="Virtual Reality Technology"
                 className="vr-image atom-image"
               />
+
               <div className="atom-image-shine" />
+
             </div>
 
-            {/* Atom orbital rings */}
+            {/* ATOM ORBITAL RINGS */}
             <div className="atom-orbit atom-orbit-one">
               <span className="atom-electron electron-one" />
             </div>
@@ -112,46 +157,21 @@ export default function Hero() {
               <span className="atom-electron electron-three" />
             </div>
 
-            {/* Center glow */}
             <div className="atom-center-glow" />
+
           </div>
 
-          {/* Floating VR Card */}
-          {/* <div className="vr-card vr-card-1">
-            <div className="vr-card-icon">VR</div>
-            <div>
-              <strong>Virtual Reality</strong>
-              <span>Immersive Experience</span>
-            </div>
-          </div> */}
-
-          {/* Floating AI Card */}
-          {/* <div className="vr-card vr-card-2">
-            <div className="vr-card-icon">AI</div>
-            <div>
-              <strong>Artificial Intelligence</strong>
-              <span>Future Technology</span>
-            </div>
-          </div> */}
-
-          {/* Floating 3D Card */}
-          {/* <div className="vr-card vr-card-3">
-            <div className="vr-card-icon">3D</div>
-            <div>
-              <strong>3D Experience</strong>
-              <span>Digital World</span>
-            </div>
-          </div> */}
-
-          {/* Existing particles */}
+          {/* FLOATING PARTICLES */}
           <span className="vr-particle particle-1" />
           <span className="vr-particle particle-2" />
           <span className="vr-particle particle-3" />
           <span className="vr-particle particle-4" />
           <span className="vr-particle particle-5" />
+
         </div>
       </div>
 
+      {/* SCROLL DOWN INDICATOR */}
       <a
         className="scroll-cue"
         href="#about"
@@ -160,8 +180,12 @@ export default function Hero() {
         <span className="mouse">
           <span className="mouse-wheel" />
         </span>
-        <span className="scroll-arrow">↓</span>
+
+        <span className="scroll-arrow">
+          <span>↓</span>
+        </span>
       </a>
+
     </section>
   );
 }

@@ -1,0 +1,395 @@
+
+/* =====================================
+   CRYPTON FUTURE MEDIA
+   PREMIUM BACKGROUND MUSIC PLAYER
+===================================== */
+
+.music-player {
+  position: fixed;
+  left: 25px;
+  bottom: 25px;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Main music button */
+.music-main-button {
+  position: relative;
+  width: 54px;
+  height: 54px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(89, 241, 211, 0.55);
+  border-radius: 18px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(24, 110, 96, 0.95),
+    rgba(7, 35, 34, 0.95)
+  );
+
+  color: #8bffe6;
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.25),
+    0 0 20px rgba(35, 222, 185, 0.16),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+
+  backdrop-filter: blur(15px);
+
+  transition: all 0.3s ease;
+}
+
+.music-main-button:hover {
+  transform: translateY(-4px) rotateX(8deg);
+
+  border-color: #7bffe3;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(35, 222, 185, 0.35);
+}
+
+.music-button-glow {
+  position: absolute;
+  inset: -5px;
+  border-radius: 22px;
+
+  background: rgba(49, 237, 197, 0.12);
+  filter: blur(12px);
+
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+.music-active .music-button-glow {
+  opacity: 1;
+}
+
+.music-button-ring {
+  position: absolute;
+  inset: -4px;
+
+  border: 1px solid rgba(87, 226, 199, 0.25);
+  border-radius: 21px;
+
+  opacity: 0;
+}
+
+.music-active .music-button-ring {
+  opacity: 1;
+  animation: musicRing 2s ease-out infinite;
+}
+
+@keyframes musicRing {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+/* Play icon */
+.music-play-icon {
+  position: relative;
+  z-index: 2;
+
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1;
+
+  text-shadow: 0 0 12px rgba(103, 255, 224, 0.8);
+}
+
+/* Sound wave */
+.music-bars {
+  position: relative;
+  z-index: 2;
+
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.music-bars i {
+  width: 3px;
+  height: 8px;
+
+  display: block;
+  border-radius: 5px;
+
+  background: #80ffe4;
+  box-shadow: 0 0 8px rgba(103, 255, 224, 0.8);
+
+  animation: musicWave 0.8s ease-in-out infinite alternate;
+}
+
+.music-bars i:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.music-bars i:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.music-bars i:nth-child(4) {
+  animation-delay: 0.1s;
+}
+
+@keyframes musicWave {
+  from {
+    height: 5px;
+  }
+
+  to {
+    height: 23px;
+  }
+}
+
+/* Settings button */
+.music-settings-button {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(87, 226, 199, 0.3);
+  border-radius: 12px;
+
+  background: rgba(8, 35, 33, 0.85);
+  color: #8bffe6;
+
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+
+  transition: 0.3s ease;
+}
+
+.music-settings-button:hover {
+  background: rgba(28, 120, 103, 0.9);
+  transform: rotate(45deg);
+}
+
+/* Music panel */
+.music-panel {
+  position: absolute;
+  left: 0;
+  bottom: 70px;
+
+  width: 260px;
+  padding: 17px;
+
+  border: 1px solid rgba(87, 226, 199, 0.25);
+  border-radius: 17px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(10, 37, 35, 0.97),
+    rgba(4, 19, 20, 0.98)
+  );
+
+  backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 15px 45px rgba(0, 0, 0, 0.35),
+    0 0 25px rgba(35, 222, 185, 0.08);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px) scale(0.96);
+  transform-origin: bottom left;
+
+  transition: all 0.3s ease;
+}
+
+.music-panel-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* Panel header */
+.music-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.music-track-icon {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: rgba(55, 206, 174, 0.15);
+  border: 1px solid rgba(87, 226, 199, 0.25);
+
+  color: #8bffe6;
+  font-size: 21px;
+}
+
+.music-track-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.music-track-info strong {
+  color: #eafffa;
+  font-size: 12px;
+}
+
+.music-track-info span {
+  color: #67d8c0;
+  font-size: 10px;
+}
+
+.music-panel-toggle {
+  border: none;
+  background: transparent;
+
+  color: #9eeadd;
+  font-size: 23px;
+
+  cursor: pointer;
+}
+
+/* Volume control */
+.music-volume {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-top: 20px;
+}
+
+.music-volume > span:first-child {
+  color: #b4d9d2;
+  font-size: 11px;
+}
+
+.music-volume input {
+  flex: 1;
+  min-width: 0;
+  height: 4px;
+
+  appearance: none;
+  border-radius: 10px;
+
+  background: linear-gradient(
+    to right,
+    #50e9c5 var(--volume-level),
+    rgba(255, 255, 255, 0.15) var(--volume-level)
+  );
+
+  cursor: pointer;
+}
+
+.music-volume input::-webkit-slider-thumb {
+  appearance: none;
+
+  width: 12px;
+  height: 12px;
+
+  border-radius: 50%;
+  background: #75f5d9;
+
+  box-shadow: 0 0 10px rgba(87, 226, 199, 0.8);
+}
+
+.music-volume input::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+
+  border: none;
+  border-radius: 50%;
+  background: #75f5d9;
+}
+
+.volume-value {
+  color: #8bffe6;
+  font-size: 10px;
+  min-width: 28px;
+  text-align: right;
+}
+
+/* Play/Pause panel button */
+.music-panel-play {
+  width: 100%;
+  margin-top: 17px;
+  padding: 10px;
+
+  border: 1px solid rgba(87, 226, 199, 0.3);
+  border-radius: 10px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(36, 150, 125, 0.35),
+    rgba(14, 65, 60, 0.5)
+  );
+
+  color: #a6ffed;
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.music-panel-play:hover {
+  background: rgba(40, 160, 135, 0.5);
+  box-shadow: 0 0 15px rgba(35, 222, 185, 0.15);
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .music-player {
+    left: 15px;
+    bottom: 15px;
+    gap: 7px;
+  }
+
+  .music-main-button {
+    width: 46px;
+    height: 46px;
+    border-radius: 15px;
+  }
+
+  .music-settings-button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .music-panel {
+    width: 245px;
+    bottom: 60px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .music-bars i,
+  .music-active .music-button-ring {
+    animation: none;
+  }
+}
