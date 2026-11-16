@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import abstractambient from "../assets/audio/abstract-ambient.mp3";
+import abstractambient from "../assets/audio/atlasaudio-ambient.mp3";
 import "./css/BackgroundMusic.css";
 
 export default function BackgroundMusic() {

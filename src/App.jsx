@@ -16,7 +16,6 @@ import Clients from "./components/Clients";
 import UploadResume from "./components/UploadResume";
 import BackgroundMusic from "./components/BackgroundMusic";
 
-
 export default function App() {
   const [showTop, setShowTop] = useState(false);
 

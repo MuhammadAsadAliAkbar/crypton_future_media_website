@@ -1,24 +1,29 @@
 
 import { useMemo, useRef } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+
 import vv from "../assets/vv.png";
 import buttonHoverSound from "../assets/audio/button-hover.mp3";
 import "./css/Hero.css";
 
 export default function Hero() {
   const hoverAudioRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
 
+  // Background particles
   const particles = useMemo(() => {
     return Array.from({ length: 70 }, (_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
       size: `${Math.random() * 3 + 1}px`,
-      delay: `${Math.random() * 5}s`,
-      duration: `${Math.random() * 5 + 4}s`,
+      delay: Math.random() * 5,
+      duration: Math.random() * 5 + 4,
       opacity: Math.random() * 0.7 + 0.2,
     }));
   }, []);
 
+  // Button hover sound
   const playHoverSound = () => {
     const audio = hoverAudioRef.current;
 
@@ -28,8 +33,56 @@ export default function Hero() {
     audio.play().catch(() => {});
   };
 
+  // Animation variants
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.18,
+      },
+    },
+  };
+
+  const textVariants = {
+    hidden: {
+      opacity: 0,
+      y: 35,
+      filter: "blur(8px)",
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.9,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  const visualVariants = {
+    hidden: {
+      opacity: 0,
+      scale: 0.65,
+      rotateY: -35,
+      rotateX: 20,
+      z: -150,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      rotateY: 0,
+      rotateX: 0,
+      z: 0,
+      transition: {
+        duration: 1.4,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
+
   return (
-    <section id="home" className="hero">
+    <section id="home" className="hero hero-motion">
 
       {/* Button Hover Sound */}
       <audio
@@ -41,7 +94,7 @@ export default function Hero() {
       {/* Background Particles */}
       <div className="custom-particles" aria-hidden="true">
         {particles.map((particle) => (
-          <span
+          <motion.span
             key={particle.id}
             className="custom-particle"
             style={{
@@ -50,8 +103,25 @@ export default function Hero() {
               width: particle.size,
               height: particle.size,
               opacity: particle.opacity,
-              animationDelay: particle.delay,
-              animationDuration: particle.duration,
+            }}
+            animate={
+              shouldReduceMotion
+                ? {}
+                : {
+                    y: [0, -25, 0],
+                    x: [0, 10, -8, 0],
+                    opacity: [
+                      particle.opacity * 0.4,
+                      particle.opacity,
+                      particle.opacity * 0.4,
+                    ],
+                  }
+            }
+            transition={{
+              duration: particle.duration,
+              delay: particle.delay,
+              repeat: Infinity,
+              ease: "easeInOut",
             }}
           />
         ))}
@@ -59,123 +129,390 @@ export default function Hero() {
 
       {/* Background Effects */}
       <div className="hero-grid" />
-      <div className="hero-glow hero-glow-left" />
-      <div className="hero-glow hero-glow-right" />
+
+      <motion.div
+        className="hero-glow hero-glow-left"
+        animate={
+          shouldReduceMotion
+            ? {}
+            : {
+                scale: [1, 1.2, 1],
+                opacity: [0.4, 0.75, 0.4],
+              }
+        }
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      <motion.div
+        className="hero-glow hero-glow-right"
+        animate={
+          shouldReduceMotion
+            ? {}
+            : {
+                scale: [1.1, 0.9, 1.1],
+                opacity: [0.35, 0.7, 0.35],
+              }
+        }
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
 
       <div className="container hero-inner">
 
         {/* LEFT CONTENT */}
-        <div className="hero-copy">
+        <motion.div
+          className="hero-copy"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
 
-          <div className="eyebrow">
+          <motion.div
+            className="eyebrow"
+            variants={textVariants}
+          >
             <span />
             FUTURE-READY DIGITAL ENGINEERING
-          </div>
+          </motion.div>
 
-          <h1>
+          <motion.h1 variants={textVariants}>
             Building the <em>future</em> with technology.
-          </h1>
+          </motion.h1>
 
-          <p>
+          <motion.p variants={textVariants}>
             Crypton Future Media creates modern software, AI solutions,
             intelligent digital products and scalable technology for
             ambitious businesses.
-          </p>
+          </motion.p>
 
           {/* ACTION BUTTONS */}
-          <div className="hero-actions">
+          <motion.div
+            className="hero-actions"
+            variants={textVariants}
+          >
 
-            <a
+            <motion.a
               href="#services"
-              className="btn btn-primary"
+              className="btn btn-primary hero-motion-btn"
               onMouseEnter={playHoverSound}
+              whileHover={
+                shouldReduceMotion
+                  ? {}
+                  : {
+                      y: -7,
+                      scale: 1.06,
+                      rotateX: -8,
+                      rotateY: 5,
+                    }
+              }
+              whileTap={{ scale: 0.96 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
             >
               Explore Services <b>↗</b>
-            </a>
+            </motion.a>
 
-            <a
+            <motion.a
               href="#contact"
-              className="btn btn-outline"
+              className="btn btn-outline hero-motion-btn"
               onMouseEnter={playHoverSound}
+              whileHover={
+                shouldReduceMotion
+                  ? {}
+                  : {
+                      y: -7,
+                      scale: 1.06,
+                      rotateX: -8,
+                      rotateY: -5,
+                    }
+              }
+              whileTap={{ scale: 0.96 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
             >
               Start a Project
-            </a>
+            </motion.a>
 
-          </div>
+          </motion.div>
 
           {/* HIGHLIGHTS */}
-          <div className="hero-highlights">
+          <motion.div
+            className="hero-highlights"
+            variants={textVariants}
+          >
 
-            <div>
-              <strong>AI</strong>
-              <span>AI & RAG</span>
-            </div>
+            {[
+              ["AI", "AI & RAG"],
+              ["WEB", "Full Stack"],
+              ["∞", "Scalable"],
+            ].map(([heading, description], index) => (
+              <motion.div
+                key={heading}
+                whileHover={
+                  shouldReduceMotion
+                    ? {}
+                    : {
+                        y: -8,
+                        rotateY: 8,
+                        scale: 1.06,
+                      }
+                }
+                transition={{ type: "spring", stiffness: 250 }}
+              >
+                <strong>{heading}</strong>
+                <span>{description}</span>
+              </motion.div>
+            ))}
 
-            <div>
-              <strong>WEB</strong>
-              <span>Full Stack</span>
-            </div>
+          </motion.div>
+        </motion.div>
 
-            <div>
-              <strong>∞</strong>
-              <span>Scalable</span>
-            </div>
+        {/* RIGHT 3D VISUAL */}
+        <motion.div
+          className="hero-art hero-art-motion"
+          variants={visualVariants}
+          initial="hidden"
+          animate="visible"
+          style={{ perspective: 1200 }}
+        >
 
-          </div>
-        </div>
+          {/* Floating 3D Image Wrapper */}
+          <motion.div
+            className="vr-wrapper atom-hero-visual"
+            animate={
+              shouldReduceMotion
+                ? {}
+                : {
+                    y: [0, -18, 0, 12, 0],
+                    rotateX: [0, 5, 0, -4, 0],
+                    rotateY: [-5, 5, -5],
+                    rotateZ: [0, 1.5, 0, -1.5, 0],
+                  }
+            }
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            whileHover={
+              shouldReduceMotion
+                ? {}
+                : {
+                    scale: 1.04,
+                    rotateY: 10,
+                    rotateX: -5,
+                    transition: {
+                      duration: 0.4,
+                    },
+                  }
+            }
+          >
 
-        {/* RIGHT VISUAL */}
-        <div className="hero-art" aria-hidden="true">
+            {/* Main Glow */}
+            <motion.div
+              className="vr-glow"
+              animate={
+                shouldReduceMotion
+                  ? {}
+                  : {
+                      scale: [0.9, 1.2, 0.9],
+                      opacity: [0.4, 0.8, 0.4],
+                    }
+              }
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
 
-          <div className="vr-wrapper atom-hero-visual">
+            {/* Circular Image */}
+            <motion.div
+              className="atom-image-circle"
+              animate={
+                shouldReduceMotion
+                  ? {}
+                  : {
+                      rotateY: [0, 8, 0, -8, 0],
+                      rotateX: [0, -5, 0, 5, 0],
+                    }
+              }
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
 
-            <div className="vr-glow" />
-
-            {/* CIRCULAR IMAGE */}
-            <div className="atom-image-circle">
-
-              <img
+              <motion.img
                 src={vv}
                 alt="Virtual Reality Technology"
                 className="vr-image atom-image"
+                animate={
+                  shouldReduceMotion
+                    ? {}
+                    : {
+                        scale: [1, 1.06, 1],
+                      }
+                }
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               />
 
               <div className="atom-image-shine" />
 
-            </div>
+            </motion.div>
 
-            {/* ATOM ORBITAL RINGS */}
-            <div className="atom-orbit atom-orbit-one">
-              <span className="atom-electron electron-one" />
-            </div>
+            {/* ORBIT ONE */}
+            <motion.div
+              className="atom-orbit atom-orbit-one"
+              animate={
+                shouldReduceMotion ? {} : { rotate: 360 }
+              }
+              transition={{
+                duration: 14,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            >
+              <motion.span
+                className="atom-electron electron-one"
+                animate={
+                  shouldReduceMotion
+                    ? {}
+                    : { scale: [1, 1.5, 1] }
+                }
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                }}
+              />
+            </motion.div>
 
-            <div className="atom-orbit atom-orbit-two">
-              <span className="atom-electron electron-two" />
-            </div>
+            {/* ORBIT TWO */}
+            <motion.div
+              className="atom-orbit atom-orbit-two"
+              animate={
+                shouldReduceMotion ? {} : { rotate: -360 }
+              }
+              transition={{
+                duration: 18,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            >
+              <motion.span
+                className="atom-electron electron-two"
+                animate={
+                  shouldReduceMotion
+                    ? {}
+                    : { scale: [1, 1.5, 1] }
+                }
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                }}
+              />
+            </motion.div>
 
-            <div className="atom-orbit atom-orbit-three">
-              <span className="atom-electron electron-three" />
-            </div>
+            {/* ORBIT THREE */}
+            <motion.div
+              className="atom-orbit atom-orbit-three"
+              animate={
+                shouldReduceMotion ? {} : { rotate: 360 }
+              }
+              transition={{
+                duration: 22,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            >
+              <motion.span
+                className="atom-electron electron-three"
+                animate={
+                  shouldReduceMotion
+                    ? {}
+                    : { scale: [1, 1.6, 1] }
+                }
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                }}
+              />
+            </motion.div>
 
-            <div className="atom-center-glow" />
+            {/* Center Glow */}
+            <motion.div
+              className="atom-center-glow"
+              animate={
+                shouldReduceMotion
+                  ? {}
+                  : {
+                      opacity: [0.4, 1, 0.4],
+                      scale: [0.8, 1.3, 0.8],
+                    }
+              }
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
 
-          </div>
+          </motion.div>
 
-          {/* FLOATING PARTICLES */}
-          <span className="vr-particle particle-1" />
-          <span className="vr-particle particle-2" />
-          <span className="vr-particle particle-3" />
-          <span className="vr-particle particle-4" />
-          <span className="vr-particle particle-5" />
+          {/* Floating Particles */}
+          {[1, 2, 3, 4, 5].map((number, index) => (
+            <motion.span
+              key={number}
+              className={`vr-particle particle-${number}`}
+              animate={
+                shouldReduceMotion
+                  ? {}
+                  : {
+                      y: [0, -25 - index * 5, 0],
+                      x: [0, index % 2 === 0 ? 12 : -12, 0],
+                      scale: [1, 1.5, 1],
+                      opacity: [0.3, 1, 0.3],
+                    }
+              }
+              transition={{
+                duration: 3 + index,
+                delay: index * 0.4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
 
-        </div>
+        </motion.div>
       </div>
 
       {/* SCROLL DOWN INDICATOR */}
-      <a
+      <motion.a
         className="scroll-cue"
         href="#about"
         aria-label="Scroll down to About section"
+        animate={
+          shouldReduceMotion
+            ? {}
+            : {
+                y: [0, 8, 0],
+              }
+        }
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
       >
         <span className="mouse">
           <span className="mouse-wheel" />
@@ -184,7 +521,7 @@ export default function Hero() {
         <span className="scroll-arrow">
           <span>↓</span>
         </span>
-      </a>
+      </motion.a>
 
     </section>
   );
