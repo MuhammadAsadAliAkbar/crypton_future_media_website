@@ -1,610 +1,477 @@
-/* =====================================================
-   ABOUT SECTION
-===================================================== */
 
-.about-section {
+/* =========================================
+   ABOUT - EXTRA LARGE CLEAN IMAGE
+========================================= */
+
+.about-atom-visual {
   position: relative;
-  overflow: hidden;
-  padding: 130px 0;
-}
+  isolation: isolate;
+  overflow: visible;
 
-
-/* =====================================================
-   HEADING
-===================================================== */
-
-.about-heading {
-  display: block;
-}
-
-.about-heading-left {
-  max-width: 850px;
-}
-
-.about-heading-left h2 {
-  margin: 18px 0 20px;
-}
-
-.about-heading-left p {
-  max-width: 680px;
-  margin: 0;
-
-  font-size: 15px;
-  line-height: 1.8;
-
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.about-heading-left {
-  flex: 1;
-}
-
-.kicker {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  margin-bottom: 22px;
-
-  color: #899696;
-
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 3px;
-}
-
-.kicker-dot {
-  width: 6px;
-  height: 6px;
-
-  border-radius: 50%;
-
-  background: #00f5d4;
-
-  box-shadow:
-    0 0 8px rgba(0, 245, 212, 0.9),
-    0 0 20px rgba(0, 245, 212, 0.4);
-}
-
-.about-heading h2 {
-  margin: 0;
-
-  font-size: clamp(50px, 7vw, 100px);
-  line-height: 0.92;
-
-  letter-spacing: -5px;
-  font-weight: 600;
-}
-
-.about-heading h2 span {
-  display: block;
-
-  color: #6f7c7c;
-}
-
-.about-heading > p {
-  width: 340px;
-
-  margin: 0;
-  padding-bottom: 5px;
-
-  color: #7d8989;
-
-  font-size: 13px;
-  line-height: 1.8;
-}
-
-
-/* =====================================================
-   MAIN LAYOUT
-===================================================== */
-
-.about-layout {
-  display: grid;
-
-  grid-template-columns: 0.95fr 1.05fr;
-
-  gap: 100px;
-
-  align-items: center;
-}
-
-
-/* =====================================================
-   IMAGE
-===================================================== */
-
-.about-image {
-  position: relative;
-
-  min-height: 620px;
+  width: 100%;
+  min-height: 760px;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  isolation: isolate;
 }
 
-.about-image-glow {
+/* =========================================
+   BACKGROUND GLOW
+========================================= */
+
+.about-atom-visual .about-image-glow {
   position: absolute;
+  z-index: 0;
 
-  width: 350px;
-  height: 350px;
+  width: 110%;
+  height: 110%;
 
-  border-radius: 50%;
+  top: 50%;
+  left: 50%;
 
-  background: rgba(0, 245, 212, 0.10);
+  transform: translate(-50%, -50%);
 
-  filter: blur(90px);
+  background: radial-gradient(
+    ellipse,
+    rgba(112, 75, 255, 0.28),
+    rgba(0, 210, 255, 0.1) 45%,
+    transparent 75%
+  );
 
-  z-index: -2;
-}
-
-
-/* =====================================================
-   IMAGE
-===================================================== */
-
-.about-image img {
-  position: relative;
-
-  width: min(100%, 520px);
-
-  z-index: 3;
-
-  object-fit: contain;
-
-  filter:
-    drop-shadow(0 25px 40px rgba(0, 0, 0, 0.5))
-    drop-shadow(0 0 30px rgba(0, 245, 212, 0.08));
-
-  transition:
-    transform 0.6s ease,
-    filter 0.6s ease;
-}
-
-.about-image:hover img {
-  transform: translateY(-10px) scale(1.02);
-
-  filter:
-    drop-shadow(0 35px 50px rgba(0, 0, 0, 0.55))
-    drop-shadow(0 0 40px rgba(0, 245, 212, 0.16));
-}
-
-
-/* =====================================================
-   ORBITS
-===================================================== */
-
-.about-orbit {
-  position: absolute;
-
-  border-radius: 50%;
-
+  filter: blur(70px);
   pointer-events: none;
 
-  border: 1px solid rgba(0, 245, 212, 0.12);
+  animation: about-soft-glow 6s ease-in-out infinite;
 }
 
-.orbit-one {
-  width: 500px;
-  height: 500px;
+/* =========================================
+   FLOATING PARTICLES CONTAINER
+========================================= */
 
-  transform: rotate(-25deg);
-}
-
-.orbit-two {
-  width: 600px;
-  height: 260px;
-
-  transform: rotate(35deg);
-
-  border-color: rgba(255, 255, 255, 0.06);
-}
-
-
-/* =====================================================
-   IMAGE NUMBER
-===================================================== */
-
-.about-image-number {
+.about-atom-visual .about-particles {
   position: absolute;
+  inset: 0;
+  z-index: 3;
 
-  left: 10px;
-  top: 20px;
-
-  z-index: 5;
-
-  display: flex;
-  flex-direction: column;
+  overflow: visible;
+  pointer-events: none;
 }
 
-.about-image-number span {
-  color: #00f5d4;
+/* =========================================
+   PARTICLE BASE
+========================================= */
 
-  font-size: 38px;
-  font-weight: 300;
-
-  line-height: 1;
-}
-
-.about-image-number small {
-  margin-top: 6px;
-
-  color: #637070;
-
-  font-size: 8px;
-
-  letter-spacing: 3px;
-}
-
-
-/* =====================================================
-   STATUS
-===================================================== */
-
-.about-image-status {
+.about-atom-visual .about-particle {
   position: absolute;
+  display: block;
 
-  right: 5px;
-  top: 60px;
-
-  z-index: 5;
-
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  padding: 9px 12px;
-
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  background: rgba(255, 255, 255, 0.025);
-
-  backdrop-filter: blur(10px);
-
-  color: #657171;
-
-  font-size: 8px;
-  letter-spacing: 2px;
-}
-
-.about-image-status span {
   width: 5px;
   height: 5px;
 
   border-radius: 50%;
 
-  background: #00f5d4;
+  background: #a78bfa;
 
-  box-shadow: 0 0 10px #00f5d4;
+  box-shadow:
+    0 0 6px currentColor,
+    0 0 14px currentColor,
+    0 0 25px currentColor;
+
+  opacity: 0;
+
+  animation: about-particle-float 6s ease-in-out infinite;
 }
 
+/* =========================================
+   PARTICLE COLORS
+========================================= */
 
-/* =====================================================
-   IMAGE LINE
-===================================================== */
+/* Purple */
 
-.about-image-line {
-  position: absolute;
-
-  left: 0;
-  right: 0;
-  bottom: 35px;
-
-  height: 1px;
-
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(0, 245, 212, 0.35),
-    transparent
-  );
+.about-atom-visual .particle-1,
+.about-atom-visual .particle-5,
+.about-atom-visual .particle-9,
+.about-atom-visual .particle-13 {
+  color: #a78bfa;
+  background: #a78bfa;
 }
 
+/* Cyan */
 
-/* =====================================================
-   IMAGE CORNERS
-===================================================== */
-
-.image-corner {
-  position: absolute;
-
-  width: 35px;
-  height: 35px;
-
-  border-color: rgba(0, 245, 212, 0.45);
-
-  z-index: 6;
+.about-atom-visual .particle-2,
+.about-atom-visual .particle-6,
+.about-atom-visual .particle-10,
+.about-atom-visual .particle-14 {
+  color: #4deaff;
+  background: #4deaff;
 }
 
-.corner-top {
-  top: 0;
-  left: 0;
+/* White / Pink */
 
-  border-top: 1px solid;
-  border-left: 1px solid;
+.about-atom-visual .particle-3,
+.about-atom-visual .particle-7,
+.about-atom-visual .particle-11,
+.about-atom-visual .particle-15 {
+  color: #e9d5ff;
+  background: #e9d5ff;
 }
 
-.corner-bottom {
-  right: 0;
-  bottom: 0;
+/* Additional Purple */
 
-  border-right: 1px solid;
-  border-bottom: 1px solid;
+.about-atom-visual .particle-4,
+.about-atom-visual .particle-8,
+.about-atom-visual .particle-12 {
+  color: #bd8aff;
+  background: #bd8aff;
 }
 
+/* =========================================
+   PARTICLE POSITIONS
+========================================= */
 
-/* =====================================================
-   CONTENT
-===================================================== */
+.about-atom-visual .particle-1 {
+  top: 15%;
+  left: 18%;
+  animation-delay: 0s;
+}
 
-.about-content {
+.about-atom-visual .particle-2 {
+  top: 25%;
+  right: 15%;
+
+  width: 7px;
+  height: 7px;
+
+  animation-delay: 1s;
+}
+
+.about-atom-visual .particle-3 {
+  top: 42%;
+  left: 8%;
+
+  width: 4px;
+  height: 4px;
+
+  animation-delay: 2s;
+}
+
+.about-atom-visual .particle-4 {
+  top: 65%;
+  right: 10%;
+
+  animation-delay: 0.5s;
+}
+
+.about-atom-visual .particle-5 {
+  top: 78%;
+  left: 20%;
+
+  width: 8px;
+  height: 8px;
+
+  animation-delay: 1.5s;
+}
+
+.about-atom-visual .particle-6 {
+  top: 12%;
+  left: 50%;
+
+  width: 4px;
+  height: 4px;
+
+  animation-delay: 2.5s;
+}
+
+.about-atom-visual .particle-7 {
+  top: 35%;
+  right: 25%;
+
+  animation-delay: 3s;
+}
+
+.about-atom-visual .particle-8 {
+  top: 85%;
+  right: 30%;
+
+  width: 7px;
+  height: 7px;
+
+  animation-delay: 1.2s;
+}
+
+.about-atom-visual .particle-9 {
+  top: 55%;
+  left: 15%;
+
+  animation-delay: 2.2s;
+}
+
+.about-atom-visual .particle-10 {
+  top: 48%;
+  right: 8%;
+
+  width: 4px;
+  height: 4px;
+
+  animation-delay: 3.5s;
+}
+
+.about-atom-visual .particle-11 {
+  top: 20%;
+  left: 75%;
+
+  animation-delay: 0.8s;
+}
+
+.about-atom-visual .particle-12 {
+  top: 72%;
+  left: 48%;
+
+  width: 6px;
+  height: 6px;
+
+  animation-delay: 2.8s;
+}
+
+.about-atom-visual .particle-13 {
+  top: 90%;
+  left: 65%;
+
+  animation-delay: 1.8s;
+}
+
+.about-atom-visual .particle-14 {
+  top: 8%;
+  right: 35%;
+
+  animation-delay: 3.2s;
+}
+
+.about-atom-visual .particle-15 {
+  top: 58%;
+  right: 35%;
+
+  width: 6px;
+  height: 6px;
+
+  animation-delay: 4s;
+}
+
+/* =========================================
+   PARTICLE FLOAT ANIMATION
+========================================= */
+
+@keyframes about-particle-float {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 15px, 0) scale(0.5);
+  }
+
+  25% {
+    opacity: 0.9;
+    transform: translate3d(12px, -10px, 0) scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: translate3d(-8px, -25px, 0) scale(0.8);
+  }
+
+  75% {
+    opacity: 1;
+    transform: translate3d(10px, -12px, 0) scale(1.2);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(-5px, -35px, 0) scale(0.4);
+  }
+}
+
+/* =========================================
+   EXTRA LARGE IMAGE - NO CARD
+========================================= */
+
+.about-atom-visual .about-image-frame {
   position: relative;
-}
+  z-index: 2;
 
-.about-label {
-  display: flex;
-  justify-content: space-between;
+  width: 120%;
+  height: 750px;
 
-  padding-bottom: 18px;
-  margin-bottom: 30px;
+  flex-shrink: 0;
 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-
-  color: #697676;
-
-  font-size: 9px;
-  letter-spacing: 2.5px;
-}
-
-
-/* =====================================================
-   TITLE
-===================================================== */
-
-.about-title {
-  margin: 0 0 25px;
-
-  font-size: clamp(38px, 4vw, 62px);
-
-  line-height: 1;
-
-  letter-spacing: -3px;
-
-  font-weight: 500;
-}
-
-.about-title span {
-  color: #6b7777;
-}
-
-
-/* =====================================================
-   DESCRIPTION
-===================================================== */
-
-.about-description {
-  max-width: 560px;
-
-  margin: 0 0 50px;
-
-  color: #808c8c;
-
-  font-size: 14px;
-  line-height: 1.9;
-}
-
-
-/* =====================================================
-   VALUES
-===================================================== */
-
-.value-list {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.value {
-  position: relative;
-
-  display: grid;
-
-  grid-template-columns: 50px 1fr 35px;
-
-  align-items: center;
-
-  gap: 20px;
-
-  padding: 23px 0;
-
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-
-  transition:
-    padding 0.35s ease,
-    background 0.35s ease;
-}
-
-.value:hover {
-  padding-left: 12px;
-}
-
-.value-number {
-  color: #00f5d4;
-
-  font-size: 10px;
-
-  letter-spacing: 2px;
-}
-
-.value-main h3 {
-  margin: 0 0 6px;
-
-  color: #e2e8e8;
-
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.value-main p {
+  padding: 0;
   margin: 0;
 
-  color: #6e7a7a;
+  border: none;
+  border-radius: 0;
 
-  font-size: 11px;
-  line-height: 1.7;
+  background: transparent;
+  box-shadow: none;
+
+  overflow: visible;
+
+  animation: about-image-float 6s ease-in-out infinite;
 }
 
+/* =========================================
+   MAIN IMAGE
+========================================= */
 
-/* =====================================================
-   ARROW
-===================================================== */
+.about-atom-visual .about-image-frame img {
+  display: block;
 
-.value-arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  height: 100%;
 
-  width: 30px;
-  height: 30px;
+  max-width: none;
 
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  object-fit: contain;
+  object-position: center;
 
-  border-radius: 50%;
+  transform: scale(1.15);
+  transform-origin: center;
 
-  color: #667272;
+  border: none;
+  border-radius: 0;
 
-  transition:
-    transform 0.35s ease,
-    color 0.35s ease,
-    border-color 0.35s ease;
+  background: transparent;
+  box-shadow: none;
+
+  animation: none;
 }
 
-.value:hover .value-arrow {
-  transform: rotate(45deg);
+/* =========================================
+   REMOVE ATOM / ORBIT / ELECTRONS
+========================================= */
 
-  color: #00f5d4;
-
-  border-color: rgba(0, 245, 212, 0.4);
+.about-atom-visual .about-atom-core,
+.about-atom-visual .about-orbit,
+.about-atom-visual .about-electron,
+.about-atom-visual .about-atom-particle {
+  display: none !important;
 }
 
+/* =========================================
+   REMOVE IMAGE OVERLAY
+========================================= */
 
-/* =====================================================
-   TAGS
-===================================================== */
-
-.about-tags {
-  display: flex;
-  flex-wrap: wrap;
-
-  gap: 8px;
-
-  margin-top: 28px;
+.about-atom-visual .about-image-overlay {
+  display: none !important;
 }
 
-.about-tags span {
-  padding: 7px 10px;
+/* =========================================
+   IMAGE FLOAT ANIMATION
+========================================= */
 
-  border: 1px solid rgba(255, 255, 255, 0.07);
-
-  color: #596666;
-
-  font-size: 8px;
-
-  letter-spacing: 1.5px;
-
-  transition:
-    color 0.3s ease,
-    border-color 0.3s ease;
-}
-
-.about-tags span:hover {
-  color: #00f5d4;
-
-  border-color: rgba(0, 245, 212, 0.3);
-}
-
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
-
-@media (max-width: 1000px) {
-
-  .about-heading {
-    flex-direction: column;
-    align-items: flex-start;
+@keyframes about-image-float {
+  0%,
+  100% {
+    transform: translateY(0);
   }
 
-  .about-heading > p {
-    width: 100%;
-    max-width: 600px;
-  }
-
-  .about-layout {
-    grid-template-columns: 1fr;
-
-    gap: 60px;
-  }
-
-  .about-image {
-    min-height: 540px;
+  50% {
+    transform: translateY(-12px);
   }
 }
 
+/* =========================================
+   GLOW ANIMATION
+========================================= */
 
-@media (max-width: 600px) {
-
-  .about-section {
-    padding: 90px 0;
+@keyframes about-soft-glow {
+  0%,
+  100% {
+    opacity: 0.5;
+    scale: 0.95;
   }
 
-  .about-heading {
-    margin-bottom: 60px;
+  50% {
+    opacity: 0.95;
+    scale: 1.08;
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 992px) {
+  .about-atom-visual {
+    min-height: 650px;
   }
 
-  .about-heading h2 {
-    font-size: 50px;
-    letter-spacing: -3px;
+  .about-atom-visual .about-image-frame {
+    width: 110%;
+    height: 650px;
   }
 
-  .about-heading > p {
-    font-size: 12px;
+  .about-atom-visual .about-image-frame img {
+    transform: scale(1.1);
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+  .about-atom-visual {
+    min-height: 550px;
   }
 
-  .about-image {
-    min-height: 400px;
+  .about-atom-visual .about-image-frame {
+    width: 110%;
+    height: 550px;
   }
 
-  .orbit-one {
-    width: 340px;
-    height: 340px;
+  .about-atom-visual .about-image-frame img {
+    transform: scale(1.08);
   }
 
-  .orbit-two {
-    width: 400px;
-    height: 180px;
+  .about-atom-visual .about-particle {
+    width: 4px;
+    height: 4px;
   }
 
-  .about-image img {
-    width: 95%;
+  .about-atom-visual .particle-2,
+  .about-atom-visual .particle-5,
+  .about-atom-visual .particle-8,
+  .about-atom-visual .particle-12 {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-atom-visual {
+    min-height: 460px;
   }
 
-  .about-image-status {
-    display: none;
+  .about-atom-visual .about-image-frame {
+    width: 105%;
+    height: 460px;
   }
 
-  .about-title {
-    font-size: 40px;
+  .about-atom-visual .about-image-frame img {
+    transform: scale(1.05);
+  }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .about-atom-visual .about-image-frame,
+  .about-atom-visual .about-image-glow,
+  .about-atom-visual .about-particle {
+    animation: none !important;
   }
 
-  .value {
-    grid-template-columns: 38px 1fr 30px;
-
-    gap: 10px;
-  }
-
-  .value-main p {
-    font-size: 10px;
+  .about-atom-visual .about-particle {
+    opacity: 0.7;
   }
 }

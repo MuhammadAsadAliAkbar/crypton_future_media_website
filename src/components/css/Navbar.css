@@ -1,61 +1,229 @@
-/* ================================
-   NAVBAR
-================================ */
+
+/* =========================================
+   NAVBAR BASE
+========================================= */
 
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-
   z-index: 9999;
-
-  background: rgba(7, 15, 28, 0.88);
-
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-
-  border-bottom: 1px solid
-    rgba(255, 255, 255, 0.08);
-
   box-sizing: border-box;
 }
 
-/* ================================
-   CONTAINER
-================================ */
+.navbar-premium {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  isolation: isolate;
+  perspective: 1000px;
+
+  background: transparent !important;
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+
+  transition:
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+/* =========================================
+   TEAL 3D ANIMATED BACKGROUND
+========================================= */
+
+.navbar-premium::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  opacity: 0;
+
+  background: linear-gradient(
+    115deg,
+    rgba(0, 128, 128, 0.08),
+    rgba(0, 180, 170, 0.32),
+    rgba(0, 105, 110, 0.16),
+    rgba(0, 210, 190, 0.28),
+    rgba(0, 128, 128, 0.08)
+  );
+
+  background-size: 300% 300%;
+
+  border-bottom: 1px solid rgba(45, 212, 191, 0.25);
+
+  box-shadow:
+    0 10px 35px rgba(0, 128, 128, 0.10),
+    inset 0 -1px 0 rgba(45, 212, 191, 0.15);
+
+  transform:
+    perspective(900px)
+    rotateX(-75deg)
+    translateY(-35px);
+
+  transform-origin: top center;
+  backface-visibility: hidden;
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* =========================================
+   TEAL LIGHT REFLECTIONS
+========================================= */
+
+.navbar-premium::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  opacity: 0;
+
+  background:
+    radial-gradient(
+      ellipse at 15% 50%,
+      rgba(45, 212, 191, 0.22),
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at 85% 50%,
+      rgba(0, 180, 170, 0.20),
+      transparent 45%
+    ),
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(153, 255, 245, 0.13),
+      transparent
+    );
+
+  background-size:
+    100% 100%,
+    100% 100%,
+    200% 100%;
+
+  background-position:
+    center,
+    center,
+    -100% 0;
+
+  transform: translateY(-15px);
+
+  transition:
+    opacity 0.6s ease,
+    transform 0.7s ease;
+}
+
+/* =========================================
+   SCROLL DOWN STATE
+========================================= */
+
+.navbar-premium.navbar-scrolled-down {
+  background: transparent !important;
+
+  border-bottom-color: rgba(45, 212, 191, 0.22);
+
+  box-shadow: 0 10px 35px rgba(0, 128, 128, 0.10);
+}
+
+.navbar-premium.navbar-scrolled-down::before {
+  opacity: 1;
+
+  transform:
+    perspective(900px)
+    rotateX(0deg)
+    translateY(0);
+
+  animation: crypton-teal-gradient 12s ease infinite;
+}
+
+.navbar-premium.navbar-scrolled-down::after {
+  opacity: 1;
+  transform: translateY(0);
+
+  animation: crypton-teal-light 8s ease-in-out infinite;
+}
+
+/* =========================================
+   TEAL GRADIENT ANIMATION
+========================================= */
+
+@keyframes crypton-teal-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes crypton-teal-light {
+  0% {
+    background-position:
+      center,
+      center,
+      -100% 0;
+  }
+
+  50% {
+    background-position:
+      center,
+      center,
+      100% 0;
+  }
+
+  100% {
+    background-position:
+      center,
+      center,
+      200% 0;
+  }
+}
+
+/* =========================================
+   NAVBAR CONTAINER
+========================================= */
 
 .navbar .container {
   width: 100%;
   max-width: 1400px;
-
   margin: 0 auto;
-
-  padding-left: 30px;
-  padding-right: 30px;
-
+  padding: 0 30px;
   box-sizing: border-box;
 }
 
-/* ================================
-   NAV INNER
-================================ */
-
 .nav-inner {
+  position: relative;
+  z-index: 1;
+
   min-height: 82px;
 
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
-
   gap: 30px;
+
+  transition:
+    min-height 0.4s ease,
+    padding 0.4s ease;
 }
 
-/* ================================
+/* =========================================
    LOGO
-================================ */
+========================================= */
 
 .brand {
   display: inline-flex;
@@ -63,27 +231,25 @@
   justify-content: flex-start;
 
   flex-shrink: 0;
-
   gap: 12px;
-
   height: 52px;
 
   text-decoration: none;
-
   color: #ffffff;
-
   line-height: 1;
-
   white-space: nowrap;
+
+  transition: transform 0.3s ease;
 }
 
-/* ================================
-   LOGO ICON
-================================ */
+.brand:hover {
+  transform: translateY(-1px);
+}
+
+/* Logo icon */
 
 .brand-icon {
   position: relative;
-
   flex-shrink: 0;
 
   width: 44px;
@@ -95,26 +261,24 @@
 
   border-radius: 12px;
 
-  background:
-    linear-gradient(
-      135deg,
-      #00e5ff 0%,
-      #0891b2 45%,
-      #2563eb 100%
-    );
+  background: linear-gradient(
+    135deg,
+    #00e5cf 0%,
+    #0891b2 45%,
+    #0f766e 100%
+  );
 
-  box-shadow:
-    0 0 20px
-    rgba(0, 229, 255, 0.20);
+  box-shadow: 0 0 20px rgba(45, 212, 191, 0.20);
 
   overflow: hidden;
-}
 
-/* subtle shine */
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
 
 .brand-icon::before {
   content: "";
-
   position: absolute;
 
   top: -25%;
@@ -124,165 +288,96 @@
   height: 70%;
 
   border-radius: 50%;
-
-  background:
-    rgba(255, 255, 255, 0.18);
-
+  background: rgba(255, 255, 255, 0.18);
   filter: blur(10px);
 }
 
-/* ================================
-   LOGO DOTS
-================================ */
-
 .brand-icon i {
   position: absolute;
-
   display: block;
 
   width: 7px;
   height: 7px;
 
   margin: 0;
-
   padding: 0;
 
   border-radius: 50%;
-
   background: #ffffff;
 
-  box-shadow:
-    0 0 8px
-    rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
 
   z-index: 2;
 }
 
-/* left dot */
-
 .brand-icon i:nth-child(1) {
   top: 27px;
   left: 10px;
-
-  transform: none;
 }
-
-/* center dot */
 
 .brand-icon i:nth-child(2) {
   top: 10px;
   left: 19px;
-
-  transform: none;
 }
-
-/* right dot */
 
 .brand-icon i:nth-child(3) {
   top: 27px;
   right: 10px;
-
-  transform: none;
 }
 
-/* ================================
-   LOGO TEXT
-================================ */
+.brand:hover .brand-icon {
+  transform: scale(1.03);
+  box-shadow: 0 0 28px rgba(45, 212, 191, 0.35);
+}
+
+/* Logo text */
 
 .brand-text {
   display: flex;
-
   flex-direction: column;
-
   align-items: flex-start;
-
   justify-content: center;
 
   height: 44px;
-
   margin: 0;
   padding: 0;
-
   line-height: 1;
 }
 
 .brand-text strong {
   display: block;
-
   margin: 0;
   padding: 0;
 
   color: #ffffff;
-
   font-size: 16px;
-
   font-weight: 800;
-
   line-height: 1.1;
-
   letter-spacing: 2px;
 }
 
 .brand-text small {
   display: block;
-
   margin-top: 5px;
   padding: 0;
 
-  color: #67e8f9;
-
+  color: #5eead4;
   font-size: 8px;
-
   font-weight: 600;
-
   line-height: 1;
-
   letter-spacing: 2.4px;
 }
 
-/* ================================
-   LOGO HOVER
-================================ */
-
-.brand {
-  transition:
-    transform 0.3s ease;
-}
-
-.brand:hover {
-  transform:
-    translateY(-1px);
-}
-
-.brand:hover .brand-icon {
-  box-shadow:
-    0 0 28px
-    rgba(0, 229, 255, 0.35);
-}
-
-.brand-icon {
-  transition:
-    box-shadow 0.3s ease,
-    transform 0.3s ease;
-}
-
-.brand:hover .brand-icon {
-  transform:
-    scale(1.03);
-}
-/* ================================
-   NAVIGATION
-================================ */
+/* =========================================
+   NAVIGATION LINKS
+========================================= */
 
 .nav-links {
   display: flex;
-
   align-items: center;
-
   justify-content: flex-end;
 
   gap: 4px;
-
   flex: 1;
 }
 
@@ -290,25 +385,19 @@
   position: relative;
 
   display: inline-flex;
-
   align-items: center;
-
   justify-content: center;
 
   height: 40px;
-
   padding: 0 11px;
 
   border-radius: 9px;
 
-  color: rgba(255, 255, 255, 0.72);
-
+  color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
 
   font-size: 13px;
-
   font-weight: 500;
-
   white-space: nowrap;
 
   transition:
@@ -318,125 +407,99 @@
 }
 
 .nav-links > a:hover {
-  color: #fff;
-
-  background:
-    rgba(255, 255, 255, 0.06);
-
+  color: #ffffff;
+  background: rgba(45, 212, 191, 0.10);
   transform: translateY(-1px);
 }
 
-/* ================================
-   ACTIVE/HOVER LINE
-================================ */
+/* Link underline */
 
 .nav-links > a:not(.nav-cta)::after {
   content: "";
 
   position: absolute;
-
   left: 11px;
   right: 11px;
-
   bottom: 3px;
 
   height: 2px;
-
   border-radius: 20px;
 
-  background:
-    linear-gradient(
-      90deg,
-      #00e5ff,
-      #3b82f6
-    );
+  background: linear-gradient(
+    90deg,
+    #2dd4bf,
+    #99f6e4
+  );
 
   transform: scaleX(0);
-
   transform-origin: center;
 
-  transition:
-    transform 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .nav-links > a:not(.nav-cta):hover::after {
   transform: scaleX(1);
 }
 
-/* ================================
+/* =========================================
    START PROJECT BUTTON
-================================ */
+========================================= */
 
 .nav-cta {
   display: inline-flex !important;
-
   align-items: center;
-
   justify-content: center;
 
   gap: 9px;
-
   height: 42px !important;
 
   margin-left: 9px;
-
   padding: 0 17px !important;
 
   border-radius: 11px !important;
 
-  color: #06131f !important;
+  color: #042f2e !important;
 
-  background:
-    linear-gradient(
-      135deg,
-      #00e5ff,
-      #38bdf8
-    );
+  background: linear-gradient(
+    135deg,
+    #5eead4,
+    #2dd4bf
+  );
 
   font-size: 12px !important;
-
   font-weight: 700 !important;
 
-  box-shadow:
-    0 8px 25px
-    rgba(0, 229, 255, 0.16);
+  box-shadow: 0 8px 25px rgba(45, 212, 191, 0.18);
 }
 
 .nav-cta:hover {
-  color: #06131f !important;
+  color: #042f2e !important;
 
-  background:
-    linear-gradient(
-      135deg,
-      #38bdf8,
-      #00e5ff
-    ) !important;
+  background: linear-gradient(
+    135deg,
+    #99f6e4,
+    #2dd4bf
+  ) !important;
 
-  transform:
-    translateY(-2px) !important;
+  transform: translateY(-2px) !important;
 
-  box-shadow:
-    0 12px 30px
-    rgba(0, 229, 255, 0.25);
+  box-shadow: 0 12px 30px rgba(45, 212, 191, 0.28);
 }
 
 .nav-cta b {
   font-size: 17px;
-
   line-height: 1;
 
-  transition:
-    transform 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .nav-cta:hover b {
-  transform:
-    translate(3px, -3px);
+  transform: translate(3px, -3px);
 }
 
-/* ================================
+/* =========================================
    MOBILE MENU BUTTON
-================================ */
+========================================= */
 
 .menu-toggle {
   display: none;
@@ -446,13 +509,10 @@
 
   padding: 0;
 
-  border: 1px solid
-    rgba(255, 255, 255, 0.1);
-
+  border: 1px solid rgba(45, 212, 191, 0.20);
   border-radius: 11px;
 
-  background:
-    rgba(255, 255, 255, 0.05);
+  background: rgba(45, 212, 191, 0.06);
 
   cursor: pointer;
 }
@@ -466,18 +526,30 @@
   margin: 4px auto;
 
   border-radius: 10px;
-
-  background: #fff;
+  background: #ffffff;
 
   transition: 0.3s ease;
 }
 
-/* ================================
+/* Hamburger to close icon */
+
+.menu-active .menu-toggle span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.menu-active .menu-toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-active .menu-toggle span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* =========================================
    TABLET
-================================ */
+========================================= */
 
 @media (max-width: 1200px) {
-
   .navbar .container {
     padding-left: 22px;
     padding-right: 22px;
@@ -490,24 +562,21 @@
   .nav-links > a {
     padding-left: 8px;
     padding-right: 8px;
-
     font-size: 12px;
   }
 
   .nav-cta {
     margin-left: 5px;
-
     padding-left: 13px !important;
     padding-right: 13px !important;
   }
 }
 
-/* ================================
-   MOBILE
-================================ */
+/* =========================================
+   MOBILE NAVIGATION
+========================================= */
 
 @media (max-width: 1050px) {
-
   .navbar .container {
     padding-left: 20px;
     padding-right: 20px;
@@ -519,7 +588,6 @@
 
   .menu-toggle {
     display: block;
-
     flex-shrink: 0;
   }
 
@@ -527,47 +595,37 @@
     position: absolute;
 
     top: 76px;
-
     left: 20px;
     right: 20px;
 
     display: flex;
-
     flex-direction: column;
-
     align-items: stretch;
-
     justify-content: flex-start;
 
     gap: 5px;
-
     padding: 14px;
 
     flex: none;
 
-    background:
-      rgba(7, 15, 28, 0.98);
+    background: rgba(5, 35, 34, 0.97);
 
-    border:
-      1px solid
-      rgba(255, 255, 255, 0.08);
-
+    border: 1px solid rgba(45, 212, 191, 0.22);
     border-radius: 18px;
 
     box-shadow:
-      0 25px 60px
-      rgba(0, 0, 0, 0.35);
+      0 20px 50px rgba(0, 0, 0, 0.35),
+      0 0 25px rgba(45, 212, 191, 0.08);
 
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
 
     opacity: 0;
-
     visibility: hidden;
-
     pointer-events: none;
 
-    transform:
-      translateY(-12px);
+    transform: translateY(-12px) scale(0.98);
+    transform-origin: top center;
 
     transition:
       opacity 0.3s ease,
@@ -577,120 +635,79 @@
 
   .nav-links.open {
     opacity: 1;
-
     visibility: visible;
-
     pointer-events: auto;
 
-    transform:
-      translateY(0);
+    transform: translateY(0) scale(1);
   }
 
   .nav-links > a {
     width: 100%;
-
     height: 46px;
 
     justify-content: flex-start;
-
     padding: 0 15px;
 
     box-sizing: border-box;
-
     font-size: 14px;
   }
 
   .nav-links > a:not(.nav-cta)::after {
     left: 15px;
     right: auto;
-
     width: 35px;
-
-    bottom: 7px;
-
-    transform-origin: left;
   }
 
   .nav-cta {
     width: 100% !important;
-
     height: 46px !important;
 
-    margin:
-      7px 0 0 !important;
-
+    margin: 7px 0 0 !important;
     justify-content: center !important;
   }
 
-  /* Hamburger animation */
-
-  .menu-active
-    .menu-toggle
-    span:nth-child(1) {
-    transform:
-      translateY(6px)
-      rotate(45deg);
+  .navbar-premium .nav-links.open {
+    background: rgba(5, 35, 34, 0.97);
+    border: 1px solid rgba(45, 212, 191, 0.22);
   }
 
-  .menu-active
-    .menu-toggle
-    span:nth-child(2) {
-    opacity: 0;
+  .navbar-premium.navbar-scrolled-down {
+    background: transparent !important;
   }
 
-  .menu-active
-    .menu-toggle
-    span:nth-child(3) {
+  .navbar-premium::before {
     transform:
-      translateY(-6px)
-      rotate(-45deg);
+      perspective(700px)
+      rotateX(-65deg)
+      translateY(-25px);
+  }
+
+  .navbar-premium.navbar-scrolled-down::before {
+    transform:
+      perspective(700px)
+      rotateX(0deg)
+      translateY(0);
   }
 }
 
-/* ================================
+/* =========================================
    SMALL MOBILE
-================================ */
+========================================= */
 
 @media (max-width: 500px) {
-
   .navbar .container {
     padding-left: 15px;
     padding-right: 15px;
   }
 
-  .brand-icon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .brand-text strong {
-    font-size: 14px;
-  }
-
-  .brand-text small {
-    font-size: 7px;
-
-    letter-spacing: 2px;
-  }
-
-  .nav-links {
-    left: 15px;
-    right: 15px;
-  }
-}
-
-@media (max-width: 500px) {
-
   .brand {
     gap: 9px;
-
     height: 48px;
   }
 
   .brand-icon {
     width: 40px;
     height: 40px;
-
     border-radius: 11px;
   }
 
@@ -720,15 +737,34 @@
 
   .brand-text strong {
     font-size: 14px;
-
     letter-spacing: 1.7px;
   }
 
   .brand-text small {
     margin-top: 4px;
-
     font-size: 7px;
-
     letter-spacing: 1.8px;
+  }
+
+  .nav-links {
+    left: 15px;
+    right: 15px;
+  }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-premium::before,
+  .navbar-premium::after,
+  .navbar-premium,
+  .navbar-premium .nav-inner,
+  .nav-links,
+  .brand,
+  .brand-icon {
+    transition: none !important;
+    animation: none !important;
   }
 }

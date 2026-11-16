@@ -1716,3 +1716,216 @@ a { color: inherit; text-decoration: none; }
 
 }
 
+
+/* =========================================
+   PREMIUM 3D BACK TO TOP
+========================================= */
+
+.back-top {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  z-index: 9999;
+
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 18px;
+  text-decoration: none;
+
+  color: #061817;
+  background: linear-gradient(
+    145deg,
+    #68f5e5 0%,
+    #27d9c8 45%,
+    #119b91 100%
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.4);
+
+  box-shadow:
+    0 8px 0 #087a73,
+    0 12px 22px rgba(0, 0, 0, 0.3),
+    0 0 25px rgba(39, 217, 200, 0.35),
+    inset 0 2px 5px rgba(255, 255, 255, 0.65);
+
+  transform: perspective(600px) rotateX(8deg);
+  animation: backTopEntrance 0.65s cubic-bezier(.2, .8, .2, 1),
+             backTopFloat 3s ease-in-out infinite;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-radius 0.3s ease;
+
+  isolation: isolate;
+}
+
+/* Arrow */
+
+.back-top-icon {
+  position: relative;
+  z-index: 2;
+
+  font-size: 30px;
+  line-height: 1;
+  font-weight: 800;
+
+  transition: transform 0.35s ease;
+}
+
+/* Outer rotating ring */
+
+.back-top-ring {
+  position: absolute;
+  inset: -5px;
+
+  border: 1px solid rgba(39, 217, 200, 0.55);
+  border-radius: 21px;
+
+  animation: backTopRing 7s linear infinite;
+  pointer-events: none;
+}
+
+/* Glow effect */
+
+.back-top-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.7),
+    transparent 70%
+  );
+
+  opacity: 0.4;
+  filter: blur(10px);
+  z-index: -1;
+
+  animation: backTopGlow 2.5s ease-in-out infinite;
+}
+
+/* Hover interaction */
+
+.back-top:hover {
+  transform: perspective(600px) rotateX(0deg) translateY(-8px) scale(1.07);
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 5px 0 #087a73,
+    0 16px 35px rgba(0, 0, 0, 0.35),
+    0 0 40px rgba(39, 217, 200, 0.65),
+    inset 0 2px 8px rgba(255, 255, 255, 0.8);
+}
+
+.back-top:hover .back-top-icon {
+  transform: translateY(-5px);
+}
+
+.back-top:hover .back-top-ring {
+  border-radius: 50%;
+  border-color: rgba(39, 217, 200, 0.9);
+}
+
+/* Click effect */
+
+.back-top:active {
+  transform: perspective(600px) translateY(2px) scale(0.94);
+  box-shadow:
+    0 2px 0 #087a73,
+    0 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Entrance animation */
+
+@keyframes backTopEntrance {
+  from {
+    opacity: 0;
+    transform: perspective(600px) translateY(35px) rotateX(-35deg) scale(0.6);
+  }
+
+  to {
+    opacity: 1;
+    transform: perspective(600px) rotateX(8deg) scale(1);
+  }
+}
+
+/* Floating animation */
+
+@keyframes backTopFloat {
+  0%, 100% {
+    margin-bottom: 0;
+  }
+
+  50% {
+    margin-bottom: 7px;
+  }
+}
+
+/* Ring rotation */
+
+@keyframes backTopRing {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Glow pulse */
+
+@keyframes backTopGlow {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 0.7;
+    transform: scale(1.15);
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .back-top {
+    right: 18px;
+    bottom: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+  }
+
+  .back-top-icon {
+    font-size: 26px;
+  }
+
+  .back-top-ring {
+    border-radius: 18px;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .back-top,
+  .back-top-ring,
+  .back-top-glow {
+    animation: none !important;
+  }
+
+  .back-top,
+  .back-top-icon {
+    transition: none !important;
+  }
+}

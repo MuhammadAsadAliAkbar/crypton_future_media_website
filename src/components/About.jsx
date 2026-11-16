@@ -1,4 +1,5 @@
-import vrGirl from "../assets/vr-girl.png";
+
+import vrGirl from "../assets/vrGirl.png";
 import "../components/css/About.css";
 
 const values = [
@@ -23,68 +24,69 @@ export default function About() {
   return (
     <section id="about" className="section about-section">
       <div className="container">
-
-        {/* ================= HEADING ================= */}
         <div className="heading about-heading">
+          <div className="about-heading-left">
+            <span className="kicker">
+              <span className="kicker-dot" />
+              01 / ABOUT US
+            </span>
 
-  <div className="about-heading-left">
+            <h2>
+              Technology<span> with a purpose.</span>
+            </h2>
 
-    <span className="kicker">
-      <span className="kicker-dot" />
-      01 / ABOUT US
-    </span>
+            <p>
+              We combine engineering, product thinking and emerging AI to turn
+              complex ideas into reliable digital experiences.
+            </p>
+          </div>
+        </div>
 
-    <h2>
-      Technology
-      <span> with a purpose.</span>
-    </h2>
-
-    {/* TEXT HEADING KE NEECHE */}
-    <p>
-      We combine engineering, product thinking and emerging AI to turn
-      complex ideas into reliable digital experiences.
-    </p>
-
-  </div>
-
-</div>
-
-        {/* ================= ABOUT LAYOUT ================= */}
         <div className="about-layout">
+          {/* =====================================
+              ABOUT IMAGE VISUAL
+          ===================================== */}
 
-          {/* ================= LEFT IMAGE ================= */}
-          <div className="about-image">
-
+          <div className="about-image about-atom-visual">
+            {/* Background Glow */}
             <div className="about-image-glow" />
 
-            <div className="about-orbit orbit-one" />
-            <div className="about-orbit orbit-two" />
+            {/* =====================================
+                FLOATING PARTICLES
+            ===================================== */}
 
-            <div className="about-image-number">
-              <span>01</span>
-              <small>FUTURE</small>
+            <div className="about-particles">
+              <span className="about-particle particle-1" />
+              <span className="about-particle particle-2" />
+              <span className="about-particle particle-3" />
+              <span className="about-particle particle-4" />
+              <span className="about-particle particle-5" />
+              <span className="about-particle particle-6" />
+              <span className="about-particle particle-7" />
+              <span className="about-particle particle-8" />
+              <span className="about-particle particle-9" />
+              <span className="about-particle particle-10" />
+              <span className="about-particle particle-11" />
+              <span className="about-particle particle-12" />
+              <span className="about-particle particle-13" />
+              <span className="about-particle particle-14" />
+              <span className="about-particle particle-15" />
             </div>
 
-            <div className="about-image-status">
-              <span />
-              SYSTEM ACTIVE
+            {/* =====================================
+                MAIN IMAGE
+            ===================================== */}
+
+            <div className="about-image-frame">
+              <img src={vrGirl} alt="Future Technology" />
             </div>
-
-            <img
-              src={vrGirl}
-              alt="Future Technology"
-            />
-
-            <div className="about-image-line" />
-
-            <div className="image-corner corner-top" />
-            <div className="image-corner corner-bottom" />
-
           </div>
 
-          {/* ================= RIGHT CONTENT ================= */}
-          <div className="about-content">
+          {/* =====================================
+              ABOUT CONTENT
+          ===================================== */}
 
+          <div className="about-content">
             <div className="about-label">
               <span>CRYPTON FUTURE MEDIA</span>
               <span>EST. 2026</span>
@@ -102,40 +104,28 @@ export default function About() {
               experiences.
             </p>
 
-            {/* ================= VALUES ================= */}
             <div className="value-list">
-
               {values.map(([number, title, text]) => (
                 <article className="value" key={number}>
-
-                  <span className="value-number">
-                    {number}
-                  </span>
+                  <span className="value-number">{number}</span>
 
                   <div className="value-main">
                     <h3>{title}</h3>
                     <p>{text}</p>
                   </div>
 
-                  <span className="value-arrow">
-                    ↗
-                  </span>
-
+                  <span className="value-arrow">↗</span>
                 </article>
               ))}
-
             </div>
 
-            {/* ================= TECH TAGS ================= */}
             <div className="about-tags">
               <span>SOFTWARE</span>
               <span>AI</span>
               <span>RAG</span>
               <span>AGENTS</span>
             </div>
-
           </div>
-
         </div>
       </div>
     </section>

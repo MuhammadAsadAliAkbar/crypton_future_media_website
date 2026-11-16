@@ -1,5 +1,7 @@
+
 import { useMemo } from "react";
-import vr from "../assets/vr.png";
+import vrrs from "../assets/vrrs.png";
+import "../components/css/Hero.css"
 
 export default function Hero() {
   const particles = useMemo(() => {
@@ -16,8 +18,6 @@ export default function Hero() {
 
   return (
     <section id="home" className="hero">
-
-      {/* ================= CUSTOM PARTICLES ================= */}
       <div className="custom-particles" aria-hidden="true">
         {particles.map((particle) => (
           <span
@@ -41,11 +41,7 @@ export default function Hero() {
       <div className="hero-glow hero-glow-right" />
 
       <div className="container hero-inner">
-
-        {/* ================= LEFT SIDE ================= */}
-
         <div className="hero-copy">
-
           <div className="eyebrow">
             <span />
             FUTURE-READY DIGITAL ENGINEERING
@@ -62,7 +58,6 @@ export default function Hero() {
           </p>
 
           <div className="hero-actions">
-
             <a href="#services" className="btn btn-primary">
               Explore Services <b>↗</b>
             </a>
@@ -70,11 +65,9 @@ export default function Hero() {
             <a href="#contact" className="btn btn-outline">
               Start a Project
             </a>
-
           </div>
 
           <div className="hero-highlights">
-
             <div>
               <strong>AI</strong>
               <span>AI & RAG</span>
@@ -89,114 +82,86 @@ export default function Hero() {
               <strong>∞</strong>
               <span>Scalable</span>
             </div>
-
           </div>
-
         </div>
 
-
-        {/* ================= RIGHT SIDE ================= */}
-
         <div className="hero-art" aria-hidden="true">
-
-          <div className="vr-wrapper">
-
+          <div className="vr-wrapper atom-hero-visual">
             <div className="vr-glow" />
 
-            <div className="vr-orbit vr-orbit-1" />
-            <div className="vr-orbit vr-orbit-2" />
-            <div className="vr-orbit vr-orbit-3" />
-
-            <img
-              src={vr}
-              alt="Virtual Reality Technology"
-              className="vr-image"
-            />
-
-            <div className="vr-scan" />
-
-          </div>
-
-
-          {/* Floating VR Card */}
-
-          <div className="vr-card vr-card-1">
-
-            <div className="vr-card-icon">
-              VR
+            {/* Circular image container */}
+            <div className="atom-image-circle">
+              <img
+                src={vrrs}
+                alt="Virtual Reality Technology"
+                className="vr-image atom-image"
+              />
+              <div className="atom-image-shine" />
             </div>
 
+            {/* Atom orbital rings */}
+            <div className="atom-orbit atom-orbit-one">
+              <span className="atom-electron electron-one" />
+            </div>
+
+            <div className="atom-orbit atom-orbit-two">
+              <span className="atom-electron electron-two" />
+            </div>
+
+            <div className="atom-orbit atom-orbit-three">
+              <span className="atom-electron electron-three" />
+            </div>
+
+            {/* Center glow */}
+            <div className="atom-center-glow" />
+          </div>
+
+          {/* Floating VR Card */}
+          {/* <div className="vr-card vr-card-1">
+            <div className="vr-card-icon">VR</div>
             <div>
               <strong>Virtual Reality</strong>
               <span>Immersive Experience</span>
             </div>
-
-          </div>
-
+          </div> */}
 
           {/* Floating AI Card */}
-
-          <div className="vr-card vr-card-2">
-
-            <div className="vr-card-icon">
-              AI
-            </div>
-
+          {/* <div className="vr-card vr-card-2">
+            <div className="vr-card-icon">AI</div>
             <div>
               <strong>Artificial Intelligence</strong>
               <span>Future Technology</span>
             </div>
-
-          </div>
-
+          </div> */}
 
           {/* Floating 3D Card */}
-
-          <div className="vr-card vr-card-3">
-
-            <div className="vr-card-icon">
-              3D
-            </div>
-
+          {/* <div className="vr-card vr-card-3">
+            <div className="vr-card-icon">3D</div>
             <div>
               <strong>3D Experience</strong>
               <span>Digital World</span>
             </div>
-
-          </div>
-
+          </div> */}
 
           {/* Existing particles */}
-
           <span className="vr-particle particle-1" />
           <span className="vr-particle particle-2" />
           <span className="vr-particle particle-3" />
           <span className="vr-particle particle-4" />
           <span className="vr-particle particle-5" />
-
         </div>
-
       </div>
-
-
-      {/* ================= SCROLL DOWN ================= */}
 
       <a
         className="scroll-cue"
         href="#about"
         aria-label="Scroll down to About section"
       >
-
         <span className="mouse">
           <span className="mouse-wheel" />
         </span>
-
-        <span className="scroll-arrow">
-          ↓
-        </span>
-
+        <span className="scroll-arrow">↓</span>
       </a>
-
     </section>
   );
 }

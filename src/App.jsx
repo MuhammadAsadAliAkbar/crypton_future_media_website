@@ -30,7 +30,7 @@ export default function App() {
         <About />
         <Mission />
         <Services />
-        <Projects />
+        {/* <Projects /> */}
         <WhyUs />
         <Team />
         <Careers />
@@ -40,9 +40,20 @@ export default function App() {
       </main>
       <Footer />
 
+      
       {showTop && (
-        <a className="back-top" href="#home" aria-label="Back to top">↑</a>
+        <a
+          className="back-top"
+          href="#home"
+          aria-label="Back to top"
+          title="Back to top"
+        >
+          <span className="back-top-glow" />
+          <span className="back-top-icon">↑</span>
+          <span className="back-top-ring" />
+        </a>
       )}
+
     </>
   );
 }
