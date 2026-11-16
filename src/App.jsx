@@ -12,6 +12,7 @@ import Careers from "./components/Careers";
 import Footer from "./components/Footer";
 import StatsCounter from './components/StatsCounter'
 import Clients from "./components/Clients";
+import UploadResume from "./components/UploadResume";
 
 export default function App() {
   const [showTop, setShowTop] = useState(false);
@@ -34,6 +35,7 @@ export default function App() {
         <WhyUs />
         <Team />
         <Careers />
+        <UploadResume />
         <StatsCounter />
         <Contact />
         <Clients />

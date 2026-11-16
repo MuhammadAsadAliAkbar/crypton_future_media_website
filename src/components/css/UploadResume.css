@@ -1,0 +1,590 @@
+
+/* =========================================
+   UPLOAD RESUME SECTION
+========================================= */
+
+.upload-resume-section {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 110px 0;
+}
+
+.upload-resume-glow {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.upload-glow-one {
+  top: 0;
+  left: -180px;
+  background: rgba(39, 217, 200, 0.12);
+}
+
+.upload-glow-two {
+  right: -180px;
+  bottom: 0;
+  background: rgba(115, 92, 255, 0.12);
+}
+
+/* =========================================
+   MAIN LAYOUT
+========================================= */
+
+.upload-resume-container {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  align-items: center;
+  gap: 75px;
+}
+
+/* =========================================
+   LEFT CONTENT
+========================================= */
+
+.upload-resume-heading {
+  max-width: 550px;
+}
+
+.upload-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 25px;
+
+  color: #35ddce;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.upload-eyebrow-line {
+  width: 32px;
+  height: 1px;
+  background: #35ddce;
+  box-shadow: 0 0 10px #35ddce;
+}
+
+.upload-resume-heading h2 {
+  margin: 0 0 22px;
+
+  color: #f5f7fa;
+  font-size: clamp(38px, 4.5vw, 60px);
+  font-weight: 700;
+  line-height: 1.13;
+  letter-spacing: -2px;
+}
+
+.upload-resume-heading h2 em {
+  font-style: normal;
+
+  background: linear-gradient(
+    100deg,
+    #35ddce,
+    #a58aff,
+    #ec68c7
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.upload-resume-heading p {
+  max-width: 470px;
+  margin: 0;
+
+  color: rgba(225, 231, 240, 0.65);
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+/* =========================================
+   UPLOAD CARD
+========================================= */
+
+.upload-resume-card {
+  position: relative;
+  padding: 32px;
+
+  border: 1px solid rgba(53, 221, 206, 0.2);
+  border-radius: 22px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(17, 39, 45, 0.88),
+    rgba(7, 17, 27, 0.94)
+  );
+
+  backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.07);
+
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.upload-resume-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(53, 221, 206, 0.4);
+
+  box-shadow:
+    0 30px 75px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(53, 221, 206, 0.07);
+}
+
+/* =========================================
+   CARD HEADER
+========================================= */
+
+.upload-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.upload-card-label {
+  color: #35ddce;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.upload-card-top h3 {
+  margin: 8px 0 0;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 650;
+}
+
+.upload-card-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #35ddce;
+  background: rgba(53, 221, 206, 0.1);
+
+  border: 1px solid rgba(53, 221, 206, 0.25);
+  border-radius: 14px;
+}
+
+.upload-card-icon svg {
+  width: 23px;
+  height: 23px;
+}
+
+/* =========================================
+   DROPZONE
+========================================= */
+
+.resume-dropzone {
+  min-height: 205px;
+  padding: 25px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  border: 1.5px dashed rgba(53, 221, 206, 0.35);
+  border-radius: 15px;
+
+  background: rgba(53, 221, 206, 0.035);
+
+  cursor: pointer;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.resume-dropzone:hover,
+.resume-dropzone.dragging {
+  border-color: #35ddce;
+  background: rgba(53, 221, 206, 0.09);
+}
+
+.resume-dropzone.dragging {
+  transform: scale(1.015);
+}
+
+.dropzone-icon {
+  width: 55px;
+  height: 55px;
+  margin-bottom: 17px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #35ddce;
+  background: rgba(53, 221, 206, 0.1);
+
+  border: 1px solid rgba(53, 221, 206, 0.22);
+  border-radius: 16px;
+
+  box-shadow: 0 8px 25px rgba(53, 221, 206, 0.08);
+}
+
+.dropzone-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.resume-dropzone h4 {
+  margin: 0 0 8px;
+  color: #f4f8fa;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.resume-dropzone p {
+  margin: 0 0 14px;
+  color: rgba(225, 231, 240, 0.6);
+  font-size: 12px;
+}
+
+.resume-dropzone p span {
+  color: #35ddce;
+  font-weight: 700;
+}
+
+.resume-dropzone > small {
+  color: rgba(225, 231, 240, 0.4);
+  font-size: 10px;
+}
+
+/* =========================================
+   SELECTED FILE
+========================================= */
+
+.selected-resume {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  text-align: left;
+}
+
+.selected-file-icon {
+  width: 46px;
+  height: 52px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #35ddce;
+  background: rgba(53, 221, 206, 0.1);
+
+  border: 1px solid rgba(53, 221, 206, 0.25);
+  border-radius: 9px;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.selected-file-info {
+  min-width: 0;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.selected-file-info strong {
+  overflow: hidden;
+  color: #f4f8fa;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selected-file-info small {
+  color: rgba(225, 231, 240, 0.5);
+  font-size: 11px;
+}
+
+.remove-resume {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+
+  border: 1px solid rgba(255, 100, 100, 0.25);
+  border-radius: 8px;
+
+  color: #ff9292;
+  background: rgba(255, 100, 100, 0.08);
+
+  font-size: 20px;
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+.remove-resume:hover {
+  color: #fff;
+  background: #e34f5f;
+}
+
+/* =========================================
+   UPLOAD PROGRESS
+========================================= */
+
+.resume-progress {
+  margin-top: 20px;
+}
+
+.resume-progress-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 9px;
+
+  color: rgba(225, 231, 240, 0.7);
+  font-size: 11px;
+}
+
+.resume-progress-info strong {
+  color: #35ddce;
+}
+
+.resume-progress-track {
+  width: 100%;
+  height: 6px;
+  overflow: hidden;
+
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.resume-progress-track span {
+  display: block;
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: linear-gradient(
+    90deg,
+    #1ba99e,
+    #35ddce,
+    #a58aff
+  );
+
+  box-shadow: 0 0 12px rgba(53, 221, 206, 0.5);
+
+  transition: width 0.2s ease;
+}
+
+/* =========================================
+   FEEDBACK
+========================================= */
+
+.resume-feedback {
+  margin-top: 15px;
+  padding: 11px 13px;
+
+  border-radius: 9px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.resume-feedback.success {
+  color: #78f2c6;
+  background: rgba(50, 210, 140, 0.09);
+  border: 1px solid rgba(50, 210, 140, 0.2);
+}
+
+.resume-feedback.error {
+  color: #ff9a9a;
+  background: rgba(255, 90, 90, 0.08);
+  border: 1px solid rgba(255, 90, 90, 0.2);
+}
+
+/* =========================================
+   SUBMIT BUTTON
+========================================= */
+
+.resume-upload-btn {
+  position: relative;
+
+  width: 100%;
+  height: 49px;
+  margin-top: 22px;
+  padding: 0 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  color: #052320;
+  background: linear-gradient(135deg, #5af0df, #22c9b9);
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 11px;
+
+  font-size: 13px;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 0 #087d74,
+    0 10px 20px rgba(0, 0, 0, 0.2);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.resume-upload-btn b {
+  font-size: 17px;
+  transition: transform 0.25s ease;
+}
+
+.resume-upload-btn:not(:disabled):hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 7px 0 #087d74,
+    0 14px 25px rgba(0, 0, 0, 0.25);
+}
+
+.resume-upload-btn:not(:disabled):hover b {
+  transform: translate(3px, -3px);
+}
+
+.resume-upload-btn:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #087d74;
+}
+
+.resume-upload-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* =========================================
+   PRIVACY NOTE
+========================================= */
+
+.upload-privacy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  margin-top: 19px;
+
+  color: rgba(225, 231, 240, 0.45);
+  font-size: 10px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+  .upload-resume-container {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .upload-resume-heading {
+    max-width: 650px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .upload-eyebrow {
+    justify-content: center;
+  }
+
+  .upload-resume-heading p {
+    margin: 0 auto;
+  }
+
+  .upload-resume-card {
+    width: 100%;
+    max-width: 550px;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .upload-resume-section {
+    padding: 75px 0;
+  }
+
+  .upload-resume-heading h2 {
+    font-size: 38px;
+    letter-spacing: -1.3px;
+  }
+
+  .upload-resume-heading p {
+    font-size: 13px;
+  }
+
+  .upload-resume-card {
+    padding: 22px;
+    border-radius: 17px;
+  }
+
+  .upload-card-top h3 {
+    font-size: 19px;
+  }
+
+  .resume-dropzone {
+    min-height: 185px;
+    padding: 18px;
+  }
+}
+
+@media (max-width: 380px) {
+  .upload-resume-heading h2 {
+    font-size: 32px;
+  }
+
+  .upload-resume-card {
+    padding: 17px;
+  }
+
+  .resume-dropzone h4 {
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .upload-resume-card,
+  .resume-dropzone,
+  .resume-upload-btn,
+  .resume-upload-btn b,
+  .remove-resume {
+    transition: none !important;
+  }
+}

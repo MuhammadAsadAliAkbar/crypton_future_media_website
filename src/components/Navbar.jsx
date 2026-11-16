@@ -84,8 +84,11 @@ export default function Navbar() {
       } ${open ? "menu-active" : ""}`}
     >
       <div className="container nav-inner">
+
+        {/* LOGO */}
         <Logo />
 
+        {/* MOBILE MENU BUTTON */}
         <button
           type="button"
           className="menu-toggle"
@@ -99,25 +102,53 @@ export default function Navbar() {
           <span />
         </button>
 
+        {/* NAVIGATION */}
         <nav
           id="main-navigation"
           className={`nav-links ${open ? "open" : ""}`}
         >
+          {/* NAV LINKS */}
           {links.map(([id, label]) => (
             <a key={id} href={`#${id}`} onClick={closeMenu}>
               {label}
             </a>
           ))}
 
-          <a
-            className="nav-cta"
-            href="#contact"
-            onClick={closeMenu}
-          >
-            <span>Start a Project</span>
-            <b>↗</b>
-          </a>
+          {/* ACTION BUTTONS */}
+          <div className="nav-actions">
+
+            {/* CHECK MY RESUME */}
+            <a
+              className="nav-resume-btn"
+              href="#upload-resume"
+              onClick={closeMenu}
+            >
+              <span>Check My Resume</span>
+              <b>↗</b>
+            </a>
+
+            {/* LOGIN */}
+            <a
+              className="nav-login-btn"
+              href="/auth/login"
+              onClick={closeMenu}
+            >
+              Login
+            </a>
+
+            {/* START PROJECT */}
+            <a
+              className="nav-cta"
+              href="#contact"
+              onClick={closeMenu}
+            >
+              <span>Start a Project</span>
+              <b>↗</b>
+            </a>
+
+          </div>
         </nav>
+
       </div>
     </header>
   );
