@@ -497,37 +497,69 @@ export default function Hero() {
       </div>
 
       {/* PREMIUM SCROLL INDICATOR */}
-      <div className="scroll-cue-anchor">
-        <motion.a
-          className=""
-          href="#about"
-          aria-label="Scroll down to About section"
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={
-            shouldReduceMotion
-              ? { opacity: 1, scale: 1 }
-              : { opacity: 1, scale: 1, y: [0, 7, 0] }
+      
+<div className="scroll-cue-anchor">
+  <motion.a
+    className="scroll-cue-orb"
+    href="#about"
+    aria-label="Scroll down to About section"
+    initial={{ opacity: 0, scale: 0.5, rotateX: 35 }}
+    animate={
+      shouldReduceMotion
+        ? { opacity: 1, scale: 1, rotateX: 0 }
+        : {
+            opacity: 1,
+            scale: 1,
+            rotateX: [0, 8, 0],
+            y: [0, -9, 0],
           }
-          transition={
-            shouldReduceMotion
-              ? { duration: 0.45 }
-              : {
-                  opacity: { duration: 0.6, delay: 0.8 },
-                  scale: { duration: 0.6, delay: 0.8 },
-                  y: { duration: 2, repeat: Infinity, ease: "easeInOut" },
-                }
+    }
+    transition={
+      shouldReduceMotion
+        ? { duration: 0.5 }
+        : {
+            opacity: { duration: 0.7 },
+            scale: { duration: 0.7, ease: "backOut" },
+            rotateX: {
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
+            y: {
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
           }
-          whileHover={shouldReduceMotion ? {} : { scale: 1.08, rotateX: 8, rotateY: -6 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <span className="scroll-cue-glow" aria-hidden="true" />
-          {/* <span className="scroll-cue-label">SCROLL TO EXPLORE</span> */}
-          <span className="scroll-cue-mouse" aria-hidden="true">
-            <span className="scroll-cue-wheel" />
-          </span>
-          {/* <span className="scroll-cue-arrow" aria-hidden="true">↓</span> */}
-        </motion.a>
-      </div>
+    }
+    whileHover={
+      shouldReduceMotion
+        ? {}
+        : {
+            scale: 1.12,
+            rotateY: 15,
+            rotateX: -12,
+          }
+    }
+    whileTap={{ scale: 0.92 }}
+  >
+    <span className="orb-outer-glow" />
+
+    <span className="orb-ring orb-ring-one" />
+    <span className="orb-ring orb-ring-two" />
+
+    <span className="orb-inner">
+      <span className="orb-highlight" />
+
+      <span className="scroll-cue-mouse">
+        <span className="scroll-cue-wheel" />
+      </span>
+    </span>
+
+    <span className="orb-bottom-glow" />
+  </motion.a>
+</div>
+
 
     </section>
   );
