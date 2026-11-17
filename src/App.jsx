@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -15,9 +15,30 @@ import StatsCounter from "./components/StatsCounter";
 import Clients from "./components/Clients";
 import UploadResume from "./components/UploadResume";
 import BackgroundMusic from "./components/BackgroundMusic";
+import jetSound from "./assets/audio/jet-whoosh.mp3";
 
 export default function App() {
   const [showTop, setShowTop] = useState(false);
+
+  const [flying, setFlying] = useState(false);
+
+  const handleJetClick = () => {
+    if (typeof playJetSound === "function") playJetSound();
+    setFlying(true);
+    setTimeout(() => setFlying(false), 1200);
+  };
+
+  const jetAudioRef = useRef(null);
+
+  const playJetSound = () => {
+    const audio = jetAudioRef.current;
+
+    if (!audio) return;
+
+    audio.currentTime = 0;
+    audio.volume = 0.65;
+    audio.play().catch(() => { });
+  };
 
   useEffect(() => {
     const onScroll = () => setShowTop(window.scrollY > 550);
@@ -102,18 +123,65 @@ export default function App() {
       </div>
 
       {/* Back To Top */}
-      {showTop && (
+      {/* JET SOUND */}
+      <audio
+        ref={jetAudioRef}
+        src={jetSound}
+        preload="auto"
+      />
+
+      {/* BACK TO TOP */}
+      {/* {showTop && (
         <a
           className="back-top"
           href="#home"
           aria-label="Back to top"
           title="Back to top"
+          // onClick={playJetSound}
         >
           <span className="back-top-glow" />
           <span className="back-top-icon">↑</span>
           <span className="back-top-ring" />
         </a>
-      )}
+      )} */}
+
+     {showTop && (
+  <a
+    className={`back-top ${flying ? "flying" : ""}`}
+    href="#home"
+    aria-label="Back to top"
+    title="Back to top"
+    onClick={handleJetClick}
+  >
+    <svg
+      className="jet-svg"
+      viewBox="0 0 64 64"
+      width="48"
+      height="48"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      {/* flame */}
+      <path className="jet-flame" d="M29 46 L32 60 L35 46 Z" fill="#ff9f1c" />
+      {/* wings */}
+      <path d="M30 26 L8 44 L8 49 L30 41 Z" fill="#cfd8ff" />
+      <path d="M34 26 L56 44 L56 49 L34 41 Z" fill="#cfd8ff" />
+      {/* tail fins */}
+      <path d="M30 40 L21 52 L21 55 L30 49 Z" fill="#a9b6f5" />
+      <path d="M34 40 L43 52 L43 55 L34 49 Z" fill="#a9b6f5" />
+      {/* body */}
+      <path
+        d="M32 3 C36 11 38 22 38 32 L38 46 L26 46 L26 32 C26 22 28 11 32 3 Z"
+        fill="#ffffff"
+      />
+      {/* cockpit */}
+      <ellipse cx="32" cy="20" rx="3" ry="6" fill="#4cc9f0" />
+      {/* body stripe */}
+      <rect x="26" y="36" width="12" height="3" fill="#a855f7" />
+    </svg>
+  </a>
+)}
+
     </>
   );
 }
