@@ -4,10 +4,14 @@ import { motion, useReducedMotion } from "framer-motion";
 
 import vv from "../assets/vv.png";
 import buttonHoverSound from "../assets/audio/button-hover.mp3";
+import cyborgHoverSound from "../assets/audio/cyborg-hover.mp3";
+
 import "./css/Hero.css";
 
 export default function Hero() {
   const hoverAudioRef = useRef(null);
+  const cyborgAudioRef = useRef(null);
+
   const shouldReduceMotion = useReducedMotion();
 
   // Background particles
@@ -23,9 +27,19 @@ export default function Hero() {
     }));
   }, []);
 
-  // Button hover sound
+  // Normal Button Hover Sound
   const playHoverSound = () => {
     const audio = hoverAudioRef.current;
+
+    if (!audio) return;
+
+    audio.currentTime = 0;
+    audio.play().catch(() => {});
+  };
+
+  // Cyborg Scroll Indicator Hover Sound
+  const playCyborgSound = () => {
+    const audio = cyborgAudioRef.current;
 
     if (!audio) return;
 
@@ -84,14 +98,22 @@ export default function Hero() {
   return (
     <section id="home" className="hero hero-motion">
 
-      {/* Button Hover Sound */}
+      {/* AUDIO ELEMENTS */}
+
       <audio
         ref={hoverAudioRef}
         src={buttonHoverSound}
         preload="auto"
       />
 
-      {/* Background Particles */}
+      <audio
+        ref={cyborgAudioRef}
+        src={cyborgHoverSound}
+        preload="auto"
+      />
+
+      {/* BACKGROUND PARTICLES */}
+
       <div className="custom-particles" aria-hidden="true">
         {particles.map((particle) => (
           <motion.span
@@ -127,7 +149,8 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Background Effects */}
+      {/* BACKGROUND EFFECTS */}
+
       <div className="hero-grid" />
 
       <motion.div
@@ -167,6 +190,7 @@ export default function Hero() {
       <div className="container hero-inner">
 
         {/* LEFT CONTENT */}
+
         <motion.div
           className="hero-copy"
           variants={containerVariants}
@@ -193,6 +217,7 @@ export default function Hero() {
           </motion.p>
 
           {/* ACTION BUTTONS */}
+
           <motion.div
             className="hero-actions"
             variants={textVariants}
@@ -213,7 +238,11 @@ export default function Hero() {
                     }
               }
               whileTap={{ scale: 0.96 }}
-              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+              transition={{
+                type: "spring",
+                stiffness: 300,
+                damping: 15,
+              }}
             >
               Explore Services <b>↗</b>
             </motion.a>
@@ -233,7 +262,11 @@ export default function Hero() {
                     }
               }
               whileTap={{ scale: 0.96 }}
-              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+              transition={{
+                type: "spring",
+                stiffness: 300,
+                damping: 15,
+              }}
             >
               Start a Project
             </motion.a>
@@ -241,6 +274,7 @@ export default function Hero() {
           </motion.div>
 
           {/* HIGHLIGHTS */}
+
           <motion.div
             className="hero-highlights"
             variants={textVariants}
@@ -262,7 +296,10 @@ export default function Hero() {
                         scale: 1.06,
                       }
                 }
-                transition={{ type: "spring", stiffness: 250 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 250,
+                }}
               >
                 <strong>{heading}</strong>
                 <span>{description}</span>
@@ -273,6 +310,7 @@ export default function Hero() {
         </motion.div>
 
         {/* RIGHT 3D VISUAL */}
+
         <motion.div
           className="hero-art hero-art-motion"
           variants={visualVariants}
@@ -281,7 +319,8 @@ export default function Hero() {
           style={{ perspective: 1200 }}
         >
 
-          {/* Floating 3D Image Wrapper */}
+          {/* FLOATING 3D IMAGE WRAPPER */}
+
           <motion.div
             className="vr-wrapper atom-hero-visual"
             animate={
@@ -313,7 +352,8 @@ export default function Hero() {
             }
           >
 
-            {/* Main Glow */}
+            {/* MAIN GLOW */}
+
             <motion.div
               className="vr-glow"
               animate={
@@ -331,7 +371,8 @@ export default function Hero() {
               }}
             />
 
-            {/* Circular Image */}
+            {/* CIRCULAR IMAGE */}
+
             <motion.div
               className="atom-image-circle"
               animate={
@@ -372,6 +413,7 @@ export default function Hero() {
             </motion.div>
 
             {/* ORBIT ONE */}
+
             <motion.div
               className="atom-orbit atom-orbit-one"
               animate={
@@ -398,6 +440,7 @@ export default function Hero() {
             </motion.div>
 
             {/* ORBIT TWO */}
+
             <motion.div
               className="atom-orbit atom-orbit-two"
               animate={
@@ -424,6 +467,7 @@ export default function Hero() {
             </motion.div>
 
             {/* ORBIT THREE */}
+
             <motion.div
               className="atom-orbit atom-orbit-three"
               animate={
@@ -449,7 +493,8 @@ export default function Hero() {
               />
             </motion.div>
 
-            {/* Center Glow */}
+            {/* CENTER GLOW */}
+
             <motion.div
               className="atom-center-glow"
               animate={
@@ -469,7 +514,8 @@ export default function Hero() {
 
           </motion.div>
 
-          {/* Floating Particles */}
+          {/* FLOATING PARTICLES */}
+
           {[1, 2, 3, 4, 5].map((number, index) => (
             <motion.span
               key={number}
@@ -496,70 +542,101 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* PREMIUM SCROLL INDICATOR */}
-      
-<div className="scroll-cue-anchor">
-  <motion.a
-    className="scroll-cue-orb"
-    href="#about"
-    aria-label="Scroll down to About section"
-    initial={{ opacity: 0, scale: 0.5, rotateX: 35 }}
-    animate={
-      shouldReduceMotion
-        ? { opacity: 1, scale: 1, rotateX: 0 }
-        : {
-            opacity: 1,
-            scale: 1,
-            rotateX: [0, 8, 0],
-            y: [0, -9, 0],
+      {/* PREMIUM CYBORG SCROLL INDICATOR */}
+
+      <div className="scroll-cue-anchor">
+
+        <motion.a
+          className="scroll-cue-orb"
+          href="#about"
+          aria-label="Scroll down to About section"
+
+          initial={{
+            opacity: 0,
+            scale: 0.5,
+            rotateX: 35,
+          }}
+
+          animate={
+            shouldReduceMotion
+              ? {
+                  opacity: 1,
+                  scale: 1,
+                  rotateX: 0,
+                }
+              : {
+                  opacity: 1,
+                  scale: 1,
+                  rotateX: [0, 8, 0],
+                  y: [0, -9, 0],
+                }
           }
-    }
-    transition={
-      shouldReduceMotion
-        ? { duration: 0.5 }
-        : {
-            opacity: { duration: 0.7 },
-            scale: { duration: 0.7, ease: "backOut" },
-            rotateX: {
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            },
-            y: {
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-            },
+
+          transition={
+            shouldReduceMotion
+              ? {
+                  duration: 0.5,
+                }
+              : {
+                  opacity: {
+                    duration: 0.7,
+                  },
+                  scale: {
+                    duration: 0.7,
+                    ease: "backOut",
+                  },
+                  rotateX: {
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  },
+                  y: {
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  },
+                }
           }
-    }
-    whileHover={
-      shouldReduceMotion
-        ? {}
-        : {
-            scale: 1.12,
-            rotateY: 15,
-            rotateX: -12,
+
+          whileHover={
+            shouldReduceMotion
+              ? {}
+              : {
+                  scale: 1.12,
+                  rotateY: 15,
+                  rotateX: -12,
+                }
           }
-    }
-    whileTap={{ scale: 0.92 }}
-  >
-    <span className="orb-outer-glow" />
 
-    <span className="orb-ring orb-ring-one" />
-    <span className="orb-ring orb-ring-two" />
+          whileTap={{
+            scale: 0.92,
+          }}
 
-    <span className="orb-inner">
-      <span className="orb-highlight" />
+          // CYBORG SOUND ON HOVER
+          onHoverStart={() => {
+            if (!shouldReduceMotion) {
+              playCyborgSound();
+            }
+          }}
+        >
 
-      <span className="scroll-cue-mouse">
-        <span className="scroll-cue-wheel" />
-      </span>
-    </span>
+          <span className="orb-outer-glow" />
 
-    <span className="orb-bottom-glow" />
-  </motion.a>
-</div>
+          <span className="orb-ring orb-ring-one" />
+          <span className="orb-ring orb-ring-two" />
 
+          <span className="orb-inner">
+            <span className="orb-highlight" />
+
+            <span className="scroll-cue-mouse">
+              <span className="scroll-cue-wheel" />
+            </span>
+          </span>
+
+          <span className="orb-bottom-glow" />
+
+        </motion.a>
+      </div>
 
     </section>
   );

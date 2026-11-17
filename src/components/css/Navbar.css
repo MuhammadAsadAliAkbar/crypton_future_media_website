@@ -1034,3 +1034,61 @@
     animation: none !important;
   }
 }
+
+
+/* =================================
+   NAVBAR CLICK PARTICLE EFFECT
+================================= */
+
+.navbar-particle-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.navbar-click-particle {
+  position: fixed;
+  display: block;
+  border-radius: 50%;
+  pointer-events: none;
+
+  background: #43e6c1;
+
+  box-shadow:
+    0 0 6px #43e6c1,
+    0 0 14px rgba(67, 230, 193, 0.8),
+    0 0 24px rgba(67, 230, 193, 0.4);
+
+  animation: navbarParticleBurst 650ms
+    cubic-bezier(0.16, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes navbarParticleBurst {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+
+  60% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(
+        calc(-50% + var(--dx)),
+        calc(-50% + var(--dy))
+      )
+      scale(0);
+  }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .navbar-click-particle {
+    animation-duration: 200ms;
+  }
+}
